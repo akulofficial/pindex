@@ -8,6 +8,9 @@
 
 import SwiftUI
 import FacebookLogin
+import FBSDKLoginKit
+
+let loginButton = FBLoginButton(permissions: [ .publicProfile ])
 
 struct ContentView: View {
     
@@ -15,13 +18,19 @@ struct ContentView: View {
     
     var body: some View {
         
+        //loginButton.center = CGPoint(x: 0, y: 0)
+        
         VStack {
             // Inserting FB login button
+            
+            
+            
             Button(action: {loginToFB()}) {
                 Text(FBLoginText)
             } // end of Button
-        } // end of VStack
         
+        } // end of VStack
+        //return body
     } // end of body
 } // end of ContentView
 

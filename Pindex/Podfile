@@ -20,5 +20,6 @@ target 'Pindex' do
 	pod 'FacebookSDK/ShareKit'
 	pod 'FacebookSDK/PlacesKit'
 	pod 'FacebookLogin'
+  pod 'FBSDKLoginKit'
 
 end
