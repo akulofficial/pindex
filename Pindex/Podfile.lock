@@ -175,6 +175,7 @@ DEPENDENCIES:
   - FacebookSDK/LoginKit
   - FacebookSDK/PlacesKit
   - FacebookSDK/ShareKit
+  - FBSDKLoginKit
   - Firebase/Auth
   - Firebase/Core
   - Firebase/Database
@@ -246,6 +247,6 @@ SPEC CHECKSUMS:
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   Protobuf: a4dc852ad69c027ca2166ed287b856697814375b
 
-PODFILE CHECKSUM: e75e91fa33e64ee27db0b8347f51cc824b0c2534
+PODFILE CHECKSUM: 0756603833c1048d40ca3b93d0edae12a6857a0b
 
 COCOAPODS: 1.8.3
