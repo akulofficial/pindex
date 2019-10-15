@@ -5,6 +5,47 @@ PODS:
   - BoringSSL-GRPC/Implementation (0.0.3):
     - BoringSSL-GRPC/Interface (= 0.0.3)
   - BoringSSL-GRPC/Interface (0.0.3)
+  - FacebookCore (0.9.0):
+    - FBSDKCoreKit (~> 5.0)
+  - FacebookLogin (0.9.0):
+    - FacebookCore (~> 0.9.0)
+    - FBSDKCoreKit (~> 5.0)
+    - FBSDKLoginKit (~> 5.0)
+  - FacebookSDK (5.8.0):
+    - FacebookSDK/CoreKit (= 5.8.0)
+    - FacebookSDK/MarketingKit (= 5.8.0)
+  - FacebookSDK/CoreKit (5.8.0):
+    - FBSDKCoreKit (~> 5.0)
+  - FacebookSDK/LoginKit (5.8.0):
+    - FacebookSDK/CoreKit
+    - FBSDKLoginKit (~> 5.0)
+  - FacebookSDK/MarketingKit (5.8.0):
+    - FacebookSDK/CoreKit
+    - FBSDKMarketingKit (~> 5.0)
+  - FacebookSDK/PlacesKit (5.8.0):
+    - FacebookSDK/CoreKit
+    - FBSDKPlacesKit (~> 5.0)
+  - FacebookSDK/ShareKit (5.8.0):
+    - FacebookSDK/CoreKit
+    - FBSDKShareKit (~> 5.0)
+  - FBSDKCoreKit (5.8.0):
+    - FBSDKCoreKit/Basics (= 5.8.0)
+    - FBSDKCoreKit/Core (= 5.8.0)
+  - FBSDKCoreKit/Basics (5.8.0)
+  - FBSDKCoreKit/Core (5.8.0):
+    - FBSDKCoreKit/Basics
+  - FBSDKLoginKit (5.8.0):
+    - FBSDKLoginKit/Login (= 5.8.0)
+  - FBSDKLoginKit/Login (5.8.0):
+    - FBSDKCoreKit (~> 5.0)
+  - FBSDKMarketingKit (5.5.0):
+    - FBSDKCoreKit (~> 5.5)
+  - FBSDKPlacesKit (5.3.0):
+    - FBSDKCoreKit (~> 5.0)
+  - FBSDKShareKit (5.8.0):
+    - FBSDKShareKit/Share (= 5.8.0)
+  - FBSDKShareKit/Share (5.8.0):
+    - FBSDKCoreKit (~> 5.0)
   - Firebase/Auth (6.10.0):
     - Firebase/CoreOnly
     - FirebaseAuth (~> 6.3.0)
@@ -128,6 +169,12 @@ PODS:
   - Protobuf (3.10.0)
 
 DEPENDENCIES:
+  - FacebookCore
+  - FacebookLogin
+  - FacebookSDK
+  - FacebookSDK/LoginKit
+  - FacebookSDK/PlacesKit
+  - FacebookSDK/ShareKit
   - Firebase/Auth
   - Firebase/Core
   - Firebase/Database
@@ -137,6 +184,14 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - BoringSSL-GRPC
+    - FacebookCore
+    - FacebookLogin
+    - FacebookSDK
+    - FBSDKCoreKit
+    - FBSDKLoginKit
+    - FBSDKMarketingKit
+    - FBSDKPlacesKit
+    - FBSDKShareKit
     - Firebase
     - FirebaseAnalytics
     - FirebaseAuth
@@ -161,6 +216,14 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   BoringSSL-GRPC: db8764df3204ccea016e1c8dd15d9a9ad63ff318
+  FacebookCore: ba86524b66cfa86d0f8e65d08faa8504a9f732dd
+  FacebookLogin: 6cee9fd6e1fe976fe8f7eec199e27b28b14f5d63
+  FacebookSDK: 01ce488e7399bae3e2689ed8416e94174836eaf9
+  FBSDKCoreKit: e7dcac0aabcfb09d0166998edd95fe3b05a0ce5d
+  FBSDKLoginKit: 1b0cf04df0370b37404213157b060d6666ede814
+  FBSDKMarketingKit: 570d0c2778a2166b0cd55b301160d662ccbe8927
+  FBSDKPlacesKit: 0388766304ff7a89630bcc211db9f500d549f403
+  FBSDKShareKit: abc29e1bb4f9f59f679adf1ae191006d68455f96
   Firebase: 5e6b7b12bf9adb90986688edc06b156c37e109cd
   FirebaseAnalytics: 0e3ecff2c5d86070f7d4325e21f1edabfbd558dc
   FirebaseAuth: c66e990f79d1d3429165391f6cd70ace6143c25e
@@ -183,6 +246,6 @@ SPEC CHECKSUMS:
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   Protobuf: a4dc852ad69c027ca2166ed287b856697814375b
 
-PODFILE CHECKSUM: 8fd5679ac922b14b45fb7458097f7f07d55d28cf
+PODFILE CHECKSUM: e75e91fa33e64ee27db0b8347f51cc824b0c2534
 
 COCOAPODS: 1.8.3

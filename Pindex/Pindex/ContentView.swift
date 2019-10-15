@@ -7,15 +7,30 @@
 //
 
 import SwiftUI
+import FacebookLogin
 
 struct ContentView: View {
+    
+    @State var FBLoginText: String = "Facebook Login"
+    
     var body: some View {
-        Text("Pindex Map Goes Here")
-    }
-}
+        
+        VStack {
+            // Inserting FB login button
+            Button(action: {loginToFB()}) {
+                Text(FBLoginText)
+            } // end of Button
+        } // end of VStack
+        
+    } // end of body
+} // end of ContentView
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
     }
 }
+
+func loginToFB() {
+    
+} // end of loginToFB()
