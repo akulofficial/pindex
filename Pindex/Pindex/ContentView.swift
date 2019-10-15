@@ -5,41 +5,61 @@
 //  Created by Akul Gulrajani on 9/29/19.
 //  Copyright © 2019 Yeet. All rights reserved.
 //
-
 import SwiftUI
 import FacebookLogin
 import FBSDKLoginKit
-
-let loginButton = FBLoginButton(permissions: [ .publicProfile ])
+import Firebase
 
 struct ContentView: View {
-    
-    @State var FBLoginText: String = "Facebook Login"
-    
     var body: some View {
-        
-        //loginButton.center = CGPoint(x: 0, y: 0)
-        
-        VStack {
-            // Inserting FB login button
-            
-            
-            
-            Button(action: {loginToFB()}) {
-                Text(FBLoginText)
-            } // end of Button
-        
-        } // end of VStack
-        //return body
-    } // end of body
-} // end of ContentView
-
+        login().frame(width: 100, height: 50)
+    }
+}
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
     }
 }
 
-func loginToFB() {
+struct login : UIViewRepresentable {
     
-} // end of loginToFB()
+    func makeCoordinator() -> login.Coordinator {
+        return login.Coordinator()
+    }
+    func makeUIView(context: UIViewRepresentableContext<login>) -> login.UIViewType {
+        let button =   FBLoginButton()
+        button.delegate = context.coordinator;
+        return button
+    }
+    func updateUIView(_ uiView: FBLoginButton, context: UIViewRepresentableContext<login>) { // code
+    }
+    class Coordinator : NSObject, LoginButtonDelegate{
+        func loginButton(_ loginButton: FBLoginButton, didCompleteWith result: LoginManagerLoginResult?, error: Error?) {
+            //code
+            
+        }
+        
+        func loginButtonDidLogOut(_ loginButton: FBLoginButton, error: Error?) {
+            
+        
+        
+            if error != nil {
+                print((error?.localizedDescription)!)
+                return
+            }
+            if AccessToken.current != nil {
+                let credential = FacebookAuthProvider.credential(withAccessToken: AccessToken.current!.tokenString )
+                Auth.auth().signIn(with: credential) { (res, er) in
+                    if er != nil {
+                        print((er?.localizedDescription)!)
+                        return
+                    }
+                    print("success")
+                }
+            }
+        }
+        func loginButtonDidLogOut(_ loginButton: FBLoginButton) {
+            try! Auth.auth().signOut()
+        }
+    }
+}
