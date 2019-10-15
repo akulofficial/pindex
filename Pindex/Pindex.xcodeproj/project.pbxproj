@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8016BCE8AC345E886D96CDC4 /* Pods_PindexTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2170F766E8029C30FBA55898 /* Pods_PindexTests.framework */; };
 		8237739E8D3CBF9C07FDCEC1 /* Pods_Pindex.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80F0335E00875F538CB473B5 /* Pods_Pindex.framework */; };
 		9E0679F12355F43900B11DA8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9E0679F02355F43900B11DA8 /* GoogleService-Info.plist */; };
 		B12BFD8A23414790006DDD8F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12BFD8923414790006DDD8F /* AppDelegate.swift */; };
@@ -29,7 +30,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0400262299E2BE8394966C05 /* Pods-PindexTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PindexTests.release.xcconfig"; path = "Target Support Files/Pods-PindexTests/Pods-PindexTests.release.xcconfig"; sourceTree = "<group>"; };
+		2170F766E8029C30FBA55898 /* Pods_PindexTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PindexTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A8838046B5DC462A9D8E7DF /* Pods-Pindex.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pindex.release.xcconfig"; path = "Target Support Files/Pods-Pindex/Pods-Pindex.release.xcconfig"; sourceTree = "<group>"; };
+		68E6DD197876D9E0044C9360 /* Pods-PindexTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PindexTests.debug.xcconfig"; path = "Target Support Files/Pods-PindexTests/Pods-PindexTests.debug.xcconfig"; sourceTree = "<group>"; };
 		779567165C7DA33035E16CCE /* Pods-Pindex.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pindex.debug.xcconfig"; path = "Target Support Files/Pods-Pindex/Pods-Pindex.debug.xcconfig"; sourceTree = "<group>"; };
 		80F0335E00875F538CB473B5 /* Pods_Pindex.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pindex.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E0679F02355F43900B11DA8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -59,6 +63,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8016BCE8AC345E886D96CDC4 /* Pods_PindexTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -70,6 +75,8 @@
 			children = (
 				779567165C7DA33035E16CCE /* Pods-Pindex.debug.xcconfig */,
 				4A8838046B5DC462A9D8E7DF /* Pods-Pindex.release.xcconfig */,
+				68E6DD197876D9E0044C9360 /* Pods-PindexTests.debug.xcconfig */,
+				0400262299E2BE8394966C05 /* Pods-PindexTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -130,6 +137,7 @@
 			isa = PBXGroup;
 			children = (
 				80F0335E00875F538CB473B5 /* Pods_Pindex.framework */,
+				2170F766E8029C30FBA55898 /* Pods_PindexTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -160,9 +168,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B12BFDA823414790006DDD8F /* Build configuration list for PBXNativeTarget "PindexTests" */;
 			buildPhases = (
+				DEAAC9F6608785FDA91A85FC /* [CP] Check Pods Manifest.lock */,
 				B12BFD9823414790006DDD8F /* Sources */,
 				B12BFD9923414790006DDD8F /* Frameworks */,
 				B12BFD9A23414790006DDD8F /* Resources */,
+				514CE68FEBB4F0E784E21378 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -256,6 +266,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		514CE68FEBB4F0E784E21378 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PindexTests/Pods-PindexTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PindexTests/Pods-PindexTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PindexTests/Pods-PindexTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		5EF69E0AF996033193AFCABF /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -271,6 +298,28 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Pindex/Pods-Pindex-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DEAAC9F6608785FDA91A85FC /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-PindexTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -474,6 +523,7 @@
 		};
 		B12BFDA923414790006DDD8F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 68E6DD197876D9E0044C9360 /* Pods-PindexTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -496,6 +546,7 @@
 		};
 		B12BFDAA23414790006DDD8F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0400262299E2BE8394966C05 /* Pods-PindexTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";

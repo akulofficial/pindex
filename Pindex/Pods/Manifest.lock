@@ -46,6 +46,8 @@ PODS:
     - FBSDKShareKit/Share (= 5.8.0)
   - FBSDKShareKit/Share (5.8.0):
     - FBSDKCoreKit (~> 5.0)
+  - Firebase (6.10.0):
+    - Firebase/Core (= 6.10.0)
   - Firebase/Auth (6.10.0):
     - Firebase/CoreOnly
     - FirebaseAuth (~> 6.3.0)
@@ -176,6 +178,7 @@ DEPENDENCIES:
   - FacebookSDK/PlacesKit
   - FacebookSDK/ShareKit
   - FBSDKLoginKit
+  - Firebase
   - Firebase/Auth
   - Firebase/Core
   - Firebase/Database
@@ -247,6 +250,6 @@ SPEC CHECKSUMS:
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   Protobuf: a4dc852ad69c027ca2166ed287b856697814375b
 
-PODFILE CHECKSUM: 0756603833c1048d40ca3b93d0edae12a6857a0b
+PODFILE CHECKSUM: cbacf7b8d3bcaf7c384f09c0189721b2a9106fb0
 
 COCOAPODS: 1.8.3

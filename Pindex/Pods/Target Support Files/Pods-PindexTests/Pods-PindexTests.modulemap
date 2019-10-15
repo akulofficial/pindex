@@ -1,0 +1,6 @@
+framework module Pods_PindexTests {
+  umbrella header "Pods-PindexTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
