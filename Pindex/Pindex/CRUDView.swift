@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  CRUDView.swift
 //  Pindex
 //
 //  Created by Akul Gulrajani on 9/29/19.
@@ -12,20 +12,11 @@ import Firebase
 import FirebaseFirestore
 
 
-struct ContentView: View {
+struct CRUDView: View {
     @State var data: String = "PLACEHOLDER"
     @State var ref: DocumentReference? = nil
     var body: some View {
-        //login().frame(width: 100, height: 50)
-//        var ref: DocumentReference? = nil
-//        ref = db.collection("User").addDocument(data: [
-//            "First_Name": "test",
-//            "Last_Name": "test",
-//            "ID": 0
-//        ])
-//        var ref: DocumentReference? = nil
         let stack = VStack{
-            
             //Create button
             Button(action: {
                 self.ref = db.collection("User").addDocument( data: [
@@ -85,53 +76,8 @@ struct ContentView: View {
         return stack
     }
 }
-struct ContentView_Previews: PreviewProvider {
+struct CRUDView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
-    }
-}
-
-struct login : UIViewRepresentable {
-    
-    func makeCoordinator() -> login.Coordinator {
-        return login.Coordinator()
-    }
-    
-    func makeUIView(context: UIViewRepresentableContext<login>) -> login.UIViewType {
-        let button = FBLoginButton()
-        button.delegate = context.coordinator
-        return button
-    }
-    
-    func updateUIView(_ uiView: FBLoginButton, context: UIViewRepresentableContext<login>) {
-        // code
-    }
-    
-    class Coordinator : NSObject, LoginButtonDelegate{
-        func loginButton(_ loginButton: FBLoginButton, didCompleteWith result: LoginManagerLoginResult?, error: Error?) {
-            //code
-            
-        }
-        
-        func loginButtonDidLogOut(_ loginButton: FBLoginButton, error: Error?) {
-            if error != nil {
-                print((error?.localizedDescription)!)
-                return
-            }
-            if AccessToken.current != nil {
-                let credential = FacebookAuthProvider.credential(withAccessToken: AccessToken.current!.tokenString )
-                Auth.auth().signIn(with: credential) { (res, er) in
-                    if er != nil {
-                        print((er?.localizedDescription)!)
-                        return
-                    }
-                    print("success")
-                }
-            }
-        }
-        
-        func loginButtonDidLogOut(_ loginButton: FBLoginButton) {
-            try! Auth.auth().signOut()
-        }
+        CRUDView()
     }
 }

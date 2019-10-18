@@ -12,11 +12,12 @@
 		9E0679F12355F43900B11DA8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9E0679F02355F43900B11DA8 /* GoogleService-Info.plist */; };
 		B12BFD8A23414790006DDD8F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12BFD8923414790006DDD8F /* AppDelegate.swift */; };
 		B12BFD8C23414790006DDD8F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12BFD8B23414790006DDD8F /* SceneDelegate.swift */; };
-		B12BFD8E23414790006DDD8F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12BFD8D23414790006DDD8F /* ContentView.swift */; };
+		B12BFD8E23414790006DDD8F /* CRUDView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12BFD8D23414790006DDD8F /* CRUDView.swift */; };
 		B12BFD9023414790006DDD8F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B12BFD8F23414790006DDD8F /* Assets.xcassets */; };
 		B12BFD9323414790006DDD8F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B12BFD9223414790006DDD8F /* Preview Assets.xcassets */; };
 		B12BFD9623414790006DDD8F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B12BFD9423414790006DDD8F /* LaunchScreen.storyboard */; };
 		B12BFDA123414790006DDD8F /* PindexTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12BFDA023414790006DDD8F /* PindexTests.swift */; };
+		B16AEA6C235A15A5000AE178 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16AEA6B235A15A5000AE178 /* LoginView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,7 +45,7 @@
 		B12BFD862341478F006DDD8F /* Pindex.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pindex.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B12BFD8923414790006DDD8F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B12BFD8B23414790006DDD8F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		B12BFD8D23414790006DDD8F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		B12BFD8D23414790006DDD8F /* CRUDView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CRUDView.swift; sourceTree = "<group>"; };
 		B12BFD8F23414790006DDD8F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B12BFD9223414790006DDD8F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		B12BFD9523414790006DDD8F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -52,6 +53,7 @@
 		B12BFD9C23414790006DDD8F /* PindexTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PindexTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B12BFDA023414790006DDD8F /* PindexTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PindexTests.swift; sourceTree = "<group>"; };
 		B12BFDA223414790006DDD8F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B16AEA6B235A15A5000AE178 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,7 +116,8 @@
 			children = (
 				B12BFD8923414790006DDD8F /* AppDelegate.swift */,
 				B12BFD8B23414790006DDD8F /* SceneDelegate.swift */,
-				B12BFD8D23414790006DDD8F /* ContentView.swift */,
+				B16AEA6B235A15A5000AE178 /* LoginView.swift */,
+				B12BFD8D23414790006DDD8F /* CRUDView.swift */,
 				B12BFD8F23414790006DDD8F /* Assets.xcassets */,
 				B12BFD9423414790006DDD8F /* LaunchScreen.storyboard */,
 				B12BFD9723414790006DDD8F /* Info.plist */,
@@ -331,7 +334,8 @@
 			files = (
 				B12BFD8A23414790006DDD8F /* AppDelegate.swift in Sources */,
 				B12BFD8C23414790006DDD8F /* SceneDelegate.swift in Sources */,
-				B12BFD8E23414790006DDD8F /* ContentView.swift in Sources */,
+				B16AEA6C235A15A5000AE178 /* LoginView.swift in Sources */,
+				B12BFD8E23414790006DDD8F /* CRUDView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
