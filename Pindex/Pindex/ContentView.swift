@@ -13,7 +13,8 @@ import FirebaseFirestore
 
 
 struct ContentView: View {
-    @State var data: String = "PLACEHOLDER";
+    @State var data: String = "PLACEHOLDER"
+    @State var ref: DocumentReference? = nil
     var body: some View {
         //login().frame(width: 100, height: 50)
 //        var ref: DocumentReference? = nil
@@ -22,43 +23,44 @@ struct ContentView: View {
 //            "Last_Name": "test",
 //            "ID": 0
 //        ])
-        var ref: DocumentReference? = nil;
+//        var ref: DocumentReference? = nil
         let stack = VStack{
             
             //Create button
             Button(action: {
-                ref = db.collection("User").addDocument( data: [
+                self.ref = db.collection("User").addDocument( data: [
                     "First_Name": "test",
                     "Last_Name": "test",
                     "ID": 0
                 ])
-                print(ref!.documentID)
+                print(self.ref!.documentID)
             }) {
                 Text("CREATE")
             }
             
             //Read button
             Button(action: {
-                db.collection("User").document(ref!.documentID).getDocument {
+                db.collection("User").document(self.ref!.documentID).getDocument {
                     (document, error) in
                     if let document = document, document.exists {
                         self.data = document.data().map(String.init(describing:)) ?? "nil"
                         print("Document data: \(self.data)")
-                        print(ref!.documentID)
+                        print(self.ref!.documentID)
                     } else {
                         print("Document does not exist")
                     }
                 }
+                print("ref.docID after read: " + self.ref!.documentID)
             }) {
                 Text("READ")
             }
             
             //Update button
             Button(action: {
-                db.collection("User").document(ref!.documentID).updateData([
+                db.collection("User").document(self.ref!.documentID).updateData([
                     "First_Name": "updated_test"
                 ])
-                print(ref!.documentID)
+                print(self.ref!.documentID)
             }) {
                 Text("UPDATE")
             }
@@ -66,21 +68,21 @@ struct ContentView: View {
             //Delete button
             Button(action:{
                 print("BEFORE DELETION")
-                print(ref!.documentID)
-                db.collection("User").document(ref!.documentID).delete() { err in
+                print(self.ref!.documentID)
+                db.collection("User").document(self.ref!.documentID).delete() { err in
                     if let err = err {
                         print("Error removing document: \(err)")
                     } else {
                         print("Document successfully removed!")
                     }
                 }
-                print(ref!.documentID)
+                print(self.ref!.documentID)
             }) {
                 Text("DELETE")
             }
             Text(data)
         }
-        return stack;
+        return stack
     }
 }
 struct ContentView_Previews: PreviewProvider {
@@ -97,7 +99,7 @@ struct login : UIViewRepresentable {
     
     func makeUIView(context: UIViewRepresentableContext<login>) -> login.UIViewType {
         let button = FBLoginButton()
-        button.delegate = context.coordinator;
+        button.delegate = context.coordinator
         return button
     }
     
