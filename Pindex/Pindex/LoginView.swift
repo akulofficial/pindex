@@ -15,7 +15,14 @@ var signInSuccess = false
 struct LoginView: View {
 
     var body: some View {
-        login().frame(width: 100, height: 50)
+        NavigationView {
+            VStack {
+                login().frame(width: 100, height: 50)
+                NavigationLink(destination: CRUDView()) {
+                    Text("Go To CRUD operations")
+                }
+            }
+        }
     }
 }
 
@@ -43,7 +50,13 @@ struct login : UIViewRepresentable {
 
     class Coordinator : NSObject, LoginButtonDelegate{
         func loginButton(_ loginButton: FBLoginButton, didCompleteWith result: LoginManagerLoginResult?, error: Error?) {
-            //code
+            signInSuccess = true
+            if signInSuccess {
+                print("Moving to CRUDView")
+                // move to actual view
+            } else {
+                print("Sign in didn't work")
+            }
         }
 
         func loginButtonDidLogOut(_ loginButton: FBLoginButton, error: Error?) {
@@ -57,13 +70,6 @@ struct login : UIViewRepresentable {
                     if er != nil {
                         print((er?.localizedDescription)!)
                         return
-                    }
-                    signInSuccess = true
-                    if signInSuccess {
-                        print("Moving to CRUDView")
-                        CRUDView()
-                    } else {
-                        print("Sign in didn't work")
                     }
                     print("success")
                 }
