@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -31,11 +31,15 @@
 
 /* Begin PBXFileReference section */
 		0400262299E2BE8394966C05 /* Pods-PindexTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PindexTests.release.xcconfig"; path = "Target Support Files/Pods-PindexTests/Pods-PindexTests.release.xcconfig"; sourceTree = "<group>"; };
+		1A13A931F9F789314962482A /* Pods-PindexTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PindexTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PindexTests/Pods-PindexTests.debug.xcconfig"; sourceTree = "<group>"; };
 		2170F766E8029C30FBA55898 /* Pods_PindexTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PindexTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A8838046B5DC462A9D8E7DF /* Pods-Pindex.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pindex.release.xcconfig"; path = "Target Support Files/Pods-Pindex/Pods-Pindex.release.xcconfig"; sourceTree = "<group>"; };
+		4C2070671C447FFE288467FB /* Pods-Pindex.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pindex.release.xcconfig"; path = "Pods/Target Support Files/Pods-Pindex/Pods-Pindex.release.xcconfig"; sourceTree = "<group>"; };
+		53A402096C5CCCC6AF1DDD46 /* Pods-PindexTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PindexTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PindexTests/Pods-PindexTests.release.xcconfig"; sourceTree = "<group>"; };
 		68E6DD197876D9E0044C9360 /* Pods-PindexTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PindexTests.debug.xcconfig"; path = "Target Support Files/Pods-PindexTests/Pods-PindexTests.debug.xcconfig"; sourceTree = "<group>"; };
 		779567165C7DA33035E16CCE /* Pods-Pindex.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pindex.debug.xcconfig"; path = "Target Support Files/Pods-Pindex/Pods-Pindex.debug.xcconfig"; sourceTree = "<group>"; };
 		80F0335E00875F538CB473B5 /* Pods_Pindex.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pindex.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9677032B29A35083D1629F3D /* Pods-Pindex.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pindex.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Pindex/Pods-Pindex.debug.xcconfig"; sourceTree = "<group>"; };
 		9E0679F02355F43900B11DA8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B12BFD862341478F006DDD8F /* Pindex.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pindex.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B12BFD8923414790006DDD8F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -77,6 +81,10 @@
 				4A8838046B5DC462A9D8E7DF /* Pods-Pindex.release.xcconfig */,
 				68E6DD197876D9E0044C9360 /* Pods-PindexTests.debug.xcconfig */,
 				0400262299E2BE8394966C05 /* Pods-PindexTests.release.xcconfig */,
+				9677032B29A35083D1629F3D /* Pods-Pindex.debug.xcconfig */,
+				4C2070671C447FFE288467FB /* Pods-Pindex.release.xcconfig */,
+				1A13A931F9F789314962482A /* Pods-PindexTests.debug.xcconfig */,
+				53A402096C5CCCC6AF1DDD46 /* Pods-PindexTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -249,15 +257,11 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-Pindex-checkManifestLockResult.txt",
 			);
@@ -305,15 +309,11 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-PindexTests-checkManifestLockResult.txt",
 			);
@@ -486,7 +486,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Pindex/Preview Content\"";
-				DEVELOPMENT_TEAM = WDXU5B9YEY;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Pindex/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -507,7 +507,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Pindex/Preview Content\"";
-				DEVELOPMENT_TEAM = WDXU5B9YEY;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Pindex/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (

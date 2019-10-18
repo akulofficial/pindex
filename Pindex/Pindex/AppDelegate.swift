@@ -7,7 +7,11 @@
 //
 
 import UIKit
-import Firebase
+import FirebaseCore
+import FirebaseFirestore
+import FBSDKCoreKit
+
+var db: Firestore = Firestore.firestore();
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -18,8 +22,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         print("App started (AppDelegate)")
         FirebaseApp.configure()
-        var ref: DatabaseReference!
-        ref = Database.database().reference()
         return true
     }
 
