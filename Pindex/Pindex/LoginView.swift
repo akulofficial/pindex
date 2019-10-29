@@ -17,14 +17,23 @@ struct LoginView: View {
     var body: some View {
         NavigationView {
             VStack {
-                login().frame(width: 100, height: 50)
-                NavigationLink(destination: CRUDView()) {
-                    Text("Go To CRUD operations")
-                }
-            }
-        }
-    }
-}
+                // login().frame(width: 100, height: 50) // adds the facebook login button
+                HStack {
+                    
+                    // add login button and text view here
+                    NavigationLink(destination: CRUDView()) {
+                        Text("Go To CRUD operations")
+                    } // end of NavigationLink
+                    
+                    NavigationLink(destination: CRUDView()) {
+                        Text("Go To CRUD operations")
+                    } // end of NavigationLink
+                    
+                } // end of HStack
+            } // end of VStack
+        } // end of NavigationView
+    } // end of body view
+} // end of LoginView
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
@@ -32,6 +41,14 @@ struct LoginView_Previews: PreviewProvider {
     }
 }
 
+
+
+
+
+
+
+
+// ============== Facebook Stuff (Currently not in use) ===================
 
 struct login : UIViewRepresentable {
     func makeCoordinator() -> login.Coordinator {
