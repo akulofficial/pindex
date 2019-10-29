@@ -13,25 +13,43 @@ import Firebase
 
 var signInSuccess = false
 struct LoginView: View {
+    
+    @State var username = "Username"
+    @State var password = "Password"
 
     var body: some View {
         NavigationView {
             VStack {
                 // login().frame(width: 100, height: 50) // adds the facebook login button
-                HStack {
-                    
-                    // add login button and text view here
-                    NavigationLink(destination: CRUDView()) {
-                        Text("Go To CRUD operations")
-                    } // end of NavigationLink
-                    
-                    NavigationLink(destination: CRUDView()) {
-                        Text("Go To CRUD operations")
-                    } // end of NavigationLink
-                    
-                } // end of HStack
+                
+                // add login button and text view here
+                        
+                        TextField("username", text: $username)
+                            .padding(EdgeInsets(top: 8, leading: 10, bottom: 8,
+                                trailing: 10 ))
+                            .background(Color.white)
+                            .clipShape(RoundedRectangle(cornerRadius: 8))
+                            .shadow(radius: 8)
+                        TextField("password", text: $password)
+                            .padding(EdgeInsets(top: 8, leading: 10, bottom: 8,
+                                                trailing: 10 ))
+                            .background(Color.white)
+                            .clipShape(RoundedRectangle(cornerRadius: 8))
+                            .shadow(radius: 8)
+                
+                        
+                        NavigationLink(destination: MapView()) {
+                            Text("Login")
+                        } // end of NavigationLink
+                
+                NavigationLink(destination: CRUDView()) {
+                    Text("Go To CRUD operations")
+                } // end of NavigationLink
+                
             } // end of VStack
+            
         } // end of NavigationView
+        .background(Color.black)
     } // end of body view
 } // end of LoginView
 
