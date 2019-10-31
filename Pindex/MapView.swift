@@ -11,12 +11,12 @@ import MapKit
 import Foundation
 import CoreLocation
 import Combine
-
+import Firebase
+import FirebaseFirestore
 
 struct MapView: UIViewRepresentable {
     
     @ObservedObject var locationManager = LocationManager()
-//    let lc:CLLocationCoordinate2D = LocationManager.locationManager.location!.coordinate
 
     var userLatitude: String {
         return "\(locationManager.lastLocation?.coordinate.latitude ?? 0)"
@@ -26,30 +26,47 @@ struct MapView: UIViewRepresentable {
         return "\(locationManager.lastLocation?.coordinate.longitude ?? 0)"
     }
     
+    
     func makeUIView(context: UIViewRepresentableContext<MapView>) -> MKMapView {
-        MKMapView(frame: .zero)
+        let akul = MKPointAnnotation()
+        akul.title = "akul"
+        //the zeros are dummy values
+        akul.coordinate = CLLocationCoordinate2D(latitude: 0, longitude: 0)
+        
+        //lat and long are set using this section of code
+        //TODO: Update this flow to use a method to update the coordinates of a MKPointAnnotation
+        //TODO: Use a Firebase query to trigger the method so all annotations can be added to a view
+        db.collection("Location").document("akul").getDocument {
+            (document, error) in
+            if let document = document, document.exists {
+                akul.coordinate = CLLocationCoordinate2D(latitude: document.get("latitude")! as! Double, longitude: document.get("longitude")! as! Double)
+            } else {
+                print("Document does not exist")
+            }
+        }
+        let map = MKMapView(frame: .zero)
+        mapView(map, viewFor: akul)
+        map.addAnnotation(akul)
+        return map
     }
     
-//    func makeUIView(context: UIViewRepresentableContext<MapView>) ->
-//        MapView.Type; as? MapView.Type {
-//        MKMapView(frame: .zero)
-//    }
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        guard annotation is MKPointAnnotation else { return nil }
+
+        let identifier = "Annotation"
+        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
+
+        if annotationView == nil {
+            annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+            annotationView!.canShowCallout = true
+        } else {
+            annotationView!.annotation = annotation
+        }
+        
+        return annotationView;
+    }
 
     func updateUIView(_ view: MKMapView, context: Context) {
-        //let coordinate = locationManager.$lastLocation //CLLocationCoordinate2D(latitude: 34.011286, longitude: -116.166868)
-        
-//        if( CLLocationManager.authorizationStatus() == .authorizedWhenInUse ||
-//                CLLocationManager.authorizationStatus() ==  .authorizedAlways){
-//
-//              currentLocation = locManager.location
-//
-//        }
-//
-//        // checking to see if we are authorized to use the user's location
-//        if (locationManager.locationStatus) {
-//
-//        }
-        
         var center = locationManager.lastLocation?.coordinate
         if (center == nil) {
             center = CLLocationCoordinate2D(latitude: 45, longitude: 55)

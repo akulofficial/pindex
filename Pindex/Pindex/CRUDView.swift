@@ -6,8 +6,6 @@
 //  Copyright © 2019 Yeet. All rights reserved.
 //
 import SwiftUI
-import FacebookLogin
-import FBSDKLoginKit
 import Firebase
 import FirebaseFirestore
 
