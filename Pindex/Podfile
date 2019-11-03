@@ -10,15 +10,6 @@ target 'Pindex' do
   pod 'Firebase/Database'
 	pod 'Firebase/Firestore'
 	pod 'Firebase/Auth'
-
-	# Facebook
-	pod 'FacebookCore'
-	pod 'FacebookSDK'
-	pod 'FacebookSDK/LoginKit'
-	pod 'FacebookSDK/ShareKit'
-	pod 'FacebookSDK/PlacesKit'
-	pod 'FacebookLogin'
-  	pod 'FBSDKLoginKit'
   
   target 'PindexTests' do
       inherit! :search_paths
@@ -28,14 +19,6 @@ target 'Pindex' do
 	pod 'Firebase/Firestore'
 	pod 'Firebase/Auth'
 
-	# Facebook
-	pod 'FacebookCore'
-	pod 'FacebookSDK'
-	pod 'FacebookSDK/LoginKit'
-	pod 'FacebookSDK/ShareKit'
-	pod 'FacebookSDK/PlacesKit'
-	pod 'FacebookLogin'
-  	pod 'FBSDKLoginKit'
   end
 
 end

@@ -1,5 +1,5 @@
 //
-//  MapView.swift
+//  Map.swift
 //  Pindex
 //
 //  Created by Jake Taylor on 10/28/19.
@@ -14,7 +14,82 @@ import Combine
 import Firebase
 import FirebaseFirestore
 
-struct MapView: UIViewRepresentable {
+
+// Global variables necessary to center the user's location once the map has been opened
+var mStruct:Map? // used as a global variable to reference the current Map Struct
+var mStructView:MKMapView? // the view for mStruct
+var mStructContext:Map.Context? // the context associated with mStruct
+var needToCenterLocation:Bool = true // will be true when the map needs to be centered on the user's location
+
+
+
+struct MapView: View {
+
+    @State var pins: [MapPin] = addPins()
+    @State var selectedPin: MapPin?
+    @State var currentScreen:Int = 0 // used to keep track of which views should be shown to the user (0 = map, 1 = bulletineBoard)
+    
+    //@ObservedObject var bool: Bool
+    
+    
+
+    var body: some View {
+        
+        if (currentScreen == 0) { // the map should be displayed
+            return AnyView(VStack {
+                Map(pins: $pins, selectedPin: $selectedPin)
+                    .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
+                if selectedPin != nil {
+                    Text(verbatim: "Welcome to \(selectedPin?.title ?? "???")!")
+                }
+            })
+        } else if (currentScreen == 1) { // should switch to the bulletin board view
+            return AnyView(BulletinBoardView())
+        } else { // correct view was not returned
+            return AnyView(Text("ERROR WRONG VIEW"))
+        } // end of if-else
+        
+    } // end of body
+    
+
+} // end of MapView
+
+
+//struct Map_Previews: PreviewProvider {
+//    static var previews: some View {
+//        MapView(bool: Binding<Bool>(get: { globalBool }, set: { globalBool = $0 }))
+//    }
+//}
+
+
+
+
+// adds the hardcoded pins into an array
+func addPins() -> [MapPin] {
+    
+    var pins:[MapPin] = []
+    
+    let p1 = MapPin(coordinate: CLLocationCoordinate2D(latitude: 0, longitude: 0), title: "AKUL", subtitle: "NEW SUB", action: {
+        print("FOUND AKUL")
+        
+    })
+    db.collection("Location").document("akul").getDocument {
+        (document, error) in
+        if let document = document, document.exists {
+            p1.coordinate = CLLocationCoordinate2D(latitude: document.get("latitude")! as! Double, longitude: document.get("longitude")! as! Double)
+        } else {
+            print("Document does not exist")
+        }
+    }
+    pins.append(p1)
+    
+    return pins
+    
+} // end of addPins()
+
+
+// The MAP struct which holds a view and will be passed to our MapView
+struct Map: UIViewRepresentable {
     
     @ObservedObject var locationManager = LocationManager()
 
@@ -26,70 +101,97 @@ struct MapView: UIViewRepresentable {
         return "\(locationManager.lastLocation?.coordinate.longitude ?? 0)"
     }
     
-    
-    func makeUIView(context: UIViewRepresentableContext<MapView>) -> MKMapView {
-        let akul = MKPointAnnotation()
-        akul.title = "akul"
-        //the zeros are dummy values
-        akul.coordinate = CLLocationCoordinate2D(latitude: 0, longitude: 0)
-        
-        //lat and long are set using this section of code
-        //TODO: Update this flow to use a method to update the coordinates of a MKPointAnnotation
-        //TODO: Use a Firebase query to trigger the method so all annotations can be added to a view
-        db.collection("Location").document("akul").getDocument {
-            (document, error) in
-            if let document = document, document.exists {
-                akul.coordinate = CLLocationCoordinate2D(latitude: document.get("latitude")! as! Double, longitude: document.get("longitude")! as! Double)
-            } else {
-                print("Document does not exist")
+    class Coordinator: NSObject, MKMapViewDelegate {
+
+        @Binding var selectedPin: MapPin?
+
+        init(selectedPin: Binding<MapPin?>) {
+            _selectedPin = selectedPin
+        }
+
+        func mapView(_ mapView: MKMapView,
+                     didSelect view: MKAnnotationView) {
+            guard let pin = view.annotation as? MapPin else {
+                return
             }
+            pin.action?()
+            selectedPin = pin
         }
-        let map = MKMapView(frame: .zero)
-        mapView(map, viewFor: akul)
-        map.addAnnotation(akul)
-        return map
+
+        func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
+            guard (view.annotation as? MapPin) != nil else { // the pin was selected
+                return
+            }
+            selectedPin = nil
+        }
+    } // end of Coordinator Class
+
+    @Binding var pins: [MapPin]
+    @Binding var selectedPin: MapPin?
+
+    func makeCoordinator() -> Coordinator {
+        return Coordinator(selectedPin: $selectedPin)
     }
-    
-    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        guard annotation is MKPointAnnotation else { return nil }
 
-        let identifier = "Annotation"
-        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
+    func makeUIView(context: Context) -> MKMapView {
+        needToCenterLocation = true
+        let view = MKMapView(frame: .zero)
+        mStructView = view
+        mStructContext = context
+        view.delegate = context.coordinator
+        return view
+    }
 
-        if annotationView == nil {
-            annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
-            annotationView!.canShowCallout = true
-        } else {
-            annotationView!.annotation = annotation
-        }
+    func updateUIView(_ uiView: MKMapView, context: Context) {
         
-        return annotationView;
-    }
+        print("Updated UIView (Map)")
+        mStruct = self
 
-    func updateUIView(_ view: MKMapView, context: Context) {
+        // Showing region of map and adding user location
         var center = locationManager.lastLocation?.coordinate
         if (center == nil) {
-            center = CLLocationCoordinate2D(latitude: 45, longitude: 55)
+            center = CLLocationCoordinate2D(latitude: 40, longitude: -82)
         }
-        let span = MKCoordinateSpan(latitudeDelta: 2.0, longitudeDelta: 2.0)
+        let span = MKCoordinateSpan(latitudeDelta: 1.0, longitudeDelta: 1.0)
         let region = MKCoordinateRegion(center: center!, span: span)
-        view.setRegion(region, animated: true)
-        view.showsUserLocation = true
+        uiView.setRegion(region, animated: true)
+        uiView.showsUserLocation = true
+        
+        // Adding annotations
+        uiView.removeAnnotations(uiView.annotations)
+        uiView.addAnnotations(pins)
+        if let selectedPin = selectedPin {
+            uiView.selectAnnotation(selectedPin, animated: false)
+        }
+
+    } // end of updateUIView()
+
+} // end of struct Map
+
+
+
+
+
+
+class MapPin: NSObject, MKAnnotation {
+
+    var coordinate: CLLocationCoordinate2D
+    let title: String?
+    let subtitle: String?
+    let action: (() -> Void)?
+
+    init(coordinate: CLLocationCoordinate2D,
+         title: String? = nil,
+         subtitle: String? = nil,
+         action: (() -> Void)? = nil) {
+        self.coordinate = coordinate
+        self.title = title
+        self.subtitle = subtitle
+        self.action = action
     }
 
-}
+} // end of class MapPin
 
-struct MapView_Previews: PreviewProvider {
-    static var previews: some View {
-        MapView()
-            .edgesIgnoringSafeArea(.top)
-    }
-}
-
-
-
-
-// TESTING
 // Location manager used for getting the user's current location
 class LocationManager: NSObject, ObservableObject {
 
@@ -132,19 +234,43 @@ class LocationManager: NSObject, ObservableObject {
     let objectWillChange = PassthroughSubject<Void, Never>()
 
     private let locationManager = CLLocationManager()
-}
+} // end of LocationManager Class
 
 extension LocationManager: CLLocationManagerDelegate {
 
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         self.locationStatus = status
-        print(#function, statusString)
+        print(#function, statusString + "\n")
     }
 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last else { return }
         self.lastLocation = location
-        print(#function, location)
+        print(#function, "\(location)\n")
+        
+        // updating the map view to fit the user's location
+        if (mStructView != nil && mStructContext != nil && needToCenterLocation == true) {
+            
+            needToCenterLocation = false
+            
+            // Showing region of map and adding user location
+            var center = mStruct?.locationManager.lastLocation?.coordinate
+            if (center == nil) {
+                center = CLLocationCoordinate2D(latitude: 45, longitude: 55)
+            }
+            mStructView!.setCenter(center!, animated: true)
+            
+        } // end of if
+        
     }
 
+} // end of extension LocationManager
+
+/*
+struct Map_Previews: PreviewProvider {
+    static var previews: some View {
+        Map(pins: <#Binding<[MapPin]>#>, selectedPin: <#Binding<MapPin?>#>)
+            .edgesIgnoringSafeArea(.top)
+    }
 }
+*/

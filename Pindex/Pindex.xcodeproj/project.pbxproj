@@ -10,10 +10,11 @@
 		8016BCE8AC345E886D96CDC4 /* Pods_PindexTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2170F766E8029C30FBA55898 /* Pods_PindexTests.framework */; };
 		8237739E8D3CBF9C07FDCEC1 /* Pods_Pindex.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80F0335E00875F538CB473B5 /* Pods_Pindex.framework */; };
 		9E0679F12355F43900B11DA8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9E0679F02355F43900B11DA8 /* GoogleService-Info.plist */; };
+		9E22968C236E17ED002B2786 /* BulletinBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E22968B236E17ED002B2786 /* BulletinBoardView.swift */; };
 		9E90EB9F2367C01F00F0E6DA /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E90EB9E2367C01F00F0E6DA /* MapView.swift */; };
 		B12BFD8A23414790006DDD8F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12BFD8923414790006DDD8F /* AppDelegate.swift */; };
 		B12BFD8C23414790006DDD8F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12BFD8B23414790006DDD8F /* SceneDelegate.swift */; };
-		B12BFD8E23414790006DDD8F /* CRUDView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12BFD8D23414790006DDD8F /* CRUDView.swift */; };
+		B12BFD8E23414790006DDD8F /* CreateAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12BFD8D23414790006DDD8F /* CreateAccountView.swift */; };
 		B12BFD9023414790006DDD8F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B12BFD8F23414790006DDD8F /* Assets.xcassets */; };
 		B12BFD9323414790006DDD8F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B12BFD9223414790006DDD8F /* Preview Assets.xcassets */; };
 		B12BFD9623414790006DDD8F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B12BFD9423414790006DDD8F /* LaunchScreen.storyboard */; };
@@ -43,11 +44,12 @@
 		80F0335E00875F538CB473B5 /* Pods_Pindex.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pindex.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9677032B29A35083D1629F3D /* Pods-Pindex.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pindex.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Pindex/Pods-Pindex.debug.xcconfig"; sourceTree = "<group>"; };
 		9E0679F02355F43900B11DA8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		9E22968B236E17ED002B2786 /* BulletinBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BulletinBoardView.swift; sourceTree = "<group>"; };
 		9E90EB9E2367C01F00F0E6DA /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = SOURCE_ROOT; };
 		B12BFD862341478F006DDD8F /* Pindex.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pindex.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B12BFD8923414790006DDD8F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B12BFD8B23414790006DDD8F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		B12BFD8D23414790006DDD8F /* CRUDView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CRUDView.swift; sourceTree = "<group>"; };
+		B12BFD8D23414790006DDD8F /* CreateAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountView.swift; sourceTree = "<group>"; };
 		B12BFD8F23414790006DDD8F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B12BFD9223414790006DDD8F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		B12BFD9523414790006DDD8F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -116,11 +118,12 @@
 		B12BFD882341478F006DDD8F /* Pindex */ = {
 			isa = PBXGroup;
 			children = (
-				9E90EB9E2367C01F00F0E6DA /* MapView.swift */,
 				B12BFD8923414790006DDD8F /* AppDelegate.swift */,
 				B12BFD8B23414790006DDD8F /* SceneDelegate.swift */,
+				B12BFD8D23414790006DDD8F /* CreateAccountView.swift */,
 				B16AEA6B235A15A5000AE178 /* LoginView.swift */,
-				B12BFD8D23414790006DDD8F /* CRUDView.swift */,
+				9E90EB9E2367C01F00F0E6DA /* MapView.swift */,
+				9E22968B236E17ED002B2786 /* BulletinBoardView.swift */,
 				B12BFD8F23414790006DDD8F /* Assets.xcassets */,
 				B12BFD9423414790006DDD8F /* LaunchScreen.storyboard */,
 				B12BFD9723414790006DDD8F /* Info.plist */,
@@ -337,9 +340,10 @@
 			files = (
 				B12BFD8A23414790006DDD8F /* AppDelegate.swift in Sources */,
 				B12BFD8C23414790006DDD8F /* SceneDelegate.swift in Sources */,
+				9E22968C236E17ED002B2786 /* BulletinBoardView.swift in Sources */,
 				B16AEA6C235A15A5000AE178 /* LoginView.swift in Sources */,
 				9E90EB9F2367C01F00F0E6DA /* MapView.swift in Sources */,
-				B12BFD8E23414790006DDD8F /* CRUDView.swift in Sources */,
+				B12BFD8E23414790006DDD8F /* CreateAccountView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
