@@ -8,14 +8,38 @@
 
 import SwiftUI
 
-struct BulletinBoardView: View {
-    var body: some View {
-        Text("Bulletin Board Stuff Here")
-    }
-}
 
+struct BulletinBoardView: View {
+    @State var showingPostView = false
+    @Binding var mapAction: Int?
+
+    var body: some View {
+        VStack {
+            Text("Bulletin Board Stuff Here")
+            ScrollView {
+                Text("posts here")
+            }
+            Button(action: {
+                self.showingPostView.toggle()
+            }) {
+                Text("Make Post")
+            }.sheet(isPresented: $showingPostView) {
+                PostView()
+            }
+        }
+        .onDisappear(perform: {
+            self.mapAction = 0 // resetting so that the user may tap the annotation again
+            needToCenterLocation = true // resetting so that the map centers back on the user when the view swithces back
+        })
+    }
+    
+    
+} // end of BulletinBoardView
+
+/*
 struct BulletinBoardView_Previews: PreviewProvider {
     static var previews: some View {
-        BulletinBoardView()
+        BulletinBoardView(mapAction: <#Binding<Int>#>)
     }
 }
+*/

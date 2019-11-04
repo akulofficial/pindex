@@ -11,6 +11,8 @@
 		8237739E8D3CBF9C07FDCEC1 /* Pods_Pindex.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80F0335E00875F538CB473B5 /* Pods_Pindex.framework */; };
 		9E0679F12355F43900B11DA8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9E0679F02355F43900B11DA8 /* GoogleService-Info.plist */; };
 		9E22968C236E17ED002B2786 /* BulletinBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E22968B236E17ED002B2786 /* BulletinBoardView.swift */; };
+		9E22968E236F1204002B2786 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E22968D236F1204002B2786 /* Post.swift */; };
+		9E229690236F1451002B2786 /* PostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E22968F236F1451002B2786 /* PostView.swift */; };
 		9E90EB9F2367C01F00F0E6DA /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E90EB9E2367C01F00F0E6DA /* MapView.swift */; };
 		B12BFD8A23414790006DDD8F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12BFD8923414790006DDD8F /* AppDelegate.swift */; };
 		B12BFD8C23414790006DDD8F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12BFD8B23414790006DDD8F /* SceneDelegate.swift */; };
@@ -45,6 +47,8 @@
 		9677032B29A35083D1629F3D /* Pods-Pindex.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pindex.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Pindex/Pods-Pindex.debug.xcconfig"; sourceTree = "<group>"; };
 		9E0679F02355F43900B11DA8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9E22968B236E17ED002B2786 /* BulletinBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BulletinBoardView.swift; sourceTree = "<group>"; };
+		9E22968D236F1204002B2786 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		9E22968F236F1451002B2786 /* PostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostView.swift; sourceTree = "<group>"; };
 		9E90EB9E2367C01F00F0E6DA /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = SOURCE_ROOT; };
 		B12BFD862341478F006DDD8F /* Pindex.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pindex.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B12BFD8923414790006DDD8F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -124,6 +128,8 @@
 				B16AEA6B235A15A5000AE178 /* LoginView.swift */,
 				9E90EB9E2367C01F00F0E6DA /* MapView.swift */,
 				9E22968B236E17ED002B2786 /* BulletinBoardView.swift */,
+				9E22968F236F1451002B2786 /* PostView.swift */,
+				9E22968D236F1204002B2786 /* Post.swift */,
 				B12BFD8F23414790006DDD8F /* Assets.xcassets */,
 				B12BFD9423414790006DDD8F /* LaunchScreen.storyboard */,
 				B12BFD9723414790006DDD8F /* Info.plist */,
@@ -340,9 +346,11 @@
 			files = (
 				B12BFD8A23414790006DDD8F /* AppDelegate.swift in Sources */,
 				B12BFD8C23414790006DDD8F /* SceneDelegate.swift in Sources */,
+				9E229690236F1451002B2786 /* PostView.swift in Sources */,
 				9E22968C236E17ED002B2786 /* BulletinBoardView.swift in Sources */,
 				B16AEA6C235A15A5000AE178 /* LoginView.swift in Sources */,
 				9E90EB9F2367C01F00F0E6DA /* MapView.swift in Sources */,
+				9E22968E236F1204002B2786 /* Post.swift in Sources */,
 				B12BFD8E23414790006DDD8F /* CreateAccountView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

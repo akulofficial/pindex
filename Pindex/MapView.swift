@@ -22,47 +22,47 @@ var mStructContext:Map.Context? // the context associated with mStruct
 var needToCenterLocation:Bool = true // will be true when the map needs to be centered on the user's location
 
 
-
 struct MapView: View {
 
     @State var pins: [MapPin] = addPins()
     @State var selectedPin: MapPin?
-    @State var currentScreen:Int = 0 // used to keep track of which views should be shown to the user (0 = map, 1 = bulletineBoard)
-    
-    //@ObservedObject var bool: Bool
-    
-    
+    @State var action: Int? = 0 // used to force navigation link to "be tapped"
 
     var body: some View {
         
-        if (currentScreen == 0) { // the map should be displayed
-            return AnyView(VStack {
+        NavigationView {
+            VStack {
                 Map(pins: $pins, selectedPin: $selectedPin)
                     .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
                 if selectedPin != nil {
-                    Text(verbatim: "Welcome to \(selectedPin?.title ?? "???")!")
+                    //Text(verbatim: "Welcome to \(selectedPin?.title ?? "???")!")
+                    Text("")
+                    .opacity(0.0)
+                    .onAppear(perform: {self.action = 1})
                 }
-            })
-        } else if (currentScreen == 1) { // should switch to the bulletin board view
-            return AnyView(BulletinBoardView())
-        } else { // correct view was not returned
-            return AnyView(Text("ERROR WRONG VIEW"))
-        } // end of if-else
+                
+                
+                NavigationLink(destination: BulletinBoardView(mapAction: $action), tag: 1, selection: $action) {
+                    EmptyView()
+                }
+            }
+            .navigationBarTitle("Find Bulletins")
+            .onAppear(perform: {self.action = 0}) // resetting so that the user may tap the annotation again
+            .onDisappear(perform: {self.selectedPin = nil}) // resetting so that the user may tap the bulletin again and it is not already selected
         
+        }
+ 
     } // end of body
-    
 
 } // end of MapView
 
-
-//struct Map_Previews: PreviewProvider {
-//    static var previews: some View {
-//        MapView(bool: Binding<Bool>(get: { globalBool }, set: { globalBool = $0 }))
-//    }
-//}
-
-
-
+/*
+struct Map_Previews: PreviewProvider {
+    static var previews: some View {
+        MapView(bool: Binding<Bool>(get: { globalBool }, set: { globalBool = $0 }))
+    }
+}
+*/
 
 // adds the hardcoded pins into an array
 func addPins() -> [MapPin] {
@@ -71,7 +71,6 @@ func addPins() -> [MapPin] {
     
     let p1 = MapPin(coordinate: CLLocationCoordinate2D(latitude: 0, longitude: 0), title: "AKUL", subtitle: "NEW SUB", action: {
         print("FOUND AKUL")
-        
     })
     db.collection("Location").document("akul").getDocument {
         (document, error) in
@@ -84,15 +83,16 @@ func addPins() -> [MapPin] {
     pins.append(p1)
     
     return pins
-    
+       
 } // end of addPins()
+
 
 
 // The MAP struct which holds a view and will be passed to our MapView
 struct Map: UIViewRepresentable {
     
     @ObservedObject var locationManager = LocationManager()
-
+    
     var userLatitude: String {
         return "\(locationManager.lastLocation?.coordinate.latitude ?? 0)"
     }
@@ -167,11 +167,6 @@ struct Map: UIViewRepresentable {
     } // end of updateUIView()
 
 } // end of struct Map
-
-
-
-
-
 
 class MapPin: NSObject, MKAnnotation {
 
