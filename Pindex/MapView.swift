@@ -72,6 +72,9 @@ func addPins() -> [MapPin] {
     let p1 = MapPin(coordinate: CLLocationCoordinate2D(latitude: 0, longitude: 0), title: "AKUL", subtitle: "NEW SUB", action: {
         print("FOUND AKUL")
     })
+    let p2 = MapPin(coordinate: CLLocationCoordinate2D(latitude: 0, longitude: 0), title: "18th Avenue Library", subtitle: "NEW SUB", action: {
+        print("FOUND SWETHA")
+    })
     db.collection("Location").document("akul").getDocument {
         (document, error) in
         if let document = document, document.exists {
@@ -80,7 +83,16 @@ func addPins() -> [MapPin] {
             print("Document does not exist")
         }
     }
+    db.collection("Location").document("18th ave library").getDocument {
+          (document, error) in
+          if let document = document, document.exists {
+              p2.coordinate = CLLocationCoordinate2D(latitude: document.get("latitude")! as! Double, longitude: document.get("longitude")! as! Double)
+          } else {
+              print("Document does not exist")
+          }
+      }
     pins.append(p1)
+    pins.append(p2)
     
     return pins
        

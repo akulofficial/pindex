@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3967ACFB2370D09600A42316 /* NewPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3967ACFA2370D09600A42316 /* NewPost.swift */; };
 		8016BCE8AC345E886D96CDC4 /* Pods_PindexTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2170F766E8029C30FBA55898 /* Pods_PindexTests.framework */; };
 		8237739E8D3CBF9C07FDCEC1 /* Pods_Pindex.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80F0335E00875F538CB473B5 /* Pods_Pindex.framework */; };
 		9E0679F12355F43900B11DA8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9E0679F02355F43900B11DA8 /* GoogleService-Info.plist */; };
@@ -38,6 +39,7 @@
 		0400262299E2BE8394966C05 /* Pods-PindexTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PindexTests.release.xcconfig"; path = "Target Support Files/Pods-PindexTests/Pods-PindexTests.release.xcconfig"; sourceTree = "<group>"; };
 		1A13A931F9F789314962482A /* Pods-PindexTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PindexTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PindexTests/Pods-PindexTests.debug.xcconfig"; sourceTree = "<group>"; };
 		2170F766E8029C30FBA55898 /* Pods_PindexTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PindexTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3967ACFA2370D09600A42316 /* NewPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPost.swift; sourceTree = "<group>"; };
 		4A8838046B5DC462A9D8E7DF /* Pods-Pindex.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pindex.release.xcconfig"; path = "Target Support Files/Pods-Pindex/Pods-Pindex.release.xcconfig"; sourceTree = "<group>"; };
 		4C2070671C447FFE288467FB /* Pods-Pindex.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pindex.release.xcconfig"; path = "Pods/Target Support Files/Pods-Pindex/Pods-Pindex.release.xcconfig"; sourceTree = "<group>"; };
 		53A402096C5CCCC6AF1DDD46 /* Pods-PindexTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PindexTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PindexTests/Pods-PindexTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -135,6 +137,7 @@
 				B12BFD9723414790006DDD8F /* Info.plist */,
 				9E0679F02355F43900B11DA8 /* GoogleService-Info.plist */,
 				B12BFD9123414790006DDD8F /* Preview Content */,
+				3967ACFA2370D09600A42316 /* NewPost.swift */,
 			);
 			path = Pindex;
 			sourceTree = "<group>";
@@ -351,6 +354,7 @@
 				B16AEA6C235A15A5000AE178 /* LoginView.swift in Sources */,
 				9E90EB9F2367C01F00F0E6DA /* MapView.swift in Sources */,
 				9E22968E236F1204002B2786 /* Post.swift in Sources */,
+				3967ACFB2370D09600A42316 /* NewPost.swift in Sources */,
 				B12BFD8E23414790006DDD8F /* CreateAccountView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
