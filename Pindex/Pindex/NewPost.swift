@@ -16,8 +16,8 @@ struct NewPost: View {
     
     @State var eventName = "Name"
     @State var eventContent = "Content"
-    @State var datePosted = NSDate()
-    @State var dateExpiry = NSDate()
+    var datePosted = NSDate()
+    var dateExpiry = NSDate()
 
     
     @State var data: String = "PLACEHOLDER"
@@ -46,7 +46,7 @@ struct NewPost: View {
                       "Content": self.eventContent,
                       "Date_Posted": self.datePosted,
                       "Date_Expiration": self.dateExpiry,
-                      "ID" : 1
+                      "ID" : currentBulletinBoard
                    ])
                   print("\n\nDocumentID: " + self.ref!.documentID)
                 self.presentationMode.wrappedValue.dismiss()

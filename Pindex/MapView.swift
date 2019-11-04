@@ -21,6 +21,8 @@ var mStructView:MKMapView? // the view for mStruct
 var mStructContext:Map.Context? // the context associated with mStruct
 var needToCenterLocation:Bool = true // will be true when the map needs to be centered on the user's location
 
+var currentBulletinBoard:String = "B Board" // is the current bulletin board that the user is viewing
+
 
 struct MapView: View {
 
@@ -71,9 +73,11 @@ func addPins() -> [MapPin] {
     
     let p1 = MapPin(coordinate: CLLocationCoordinate2D(latitude: 0, longitude: 0), title: "AKUL", subtitle: "NEW SUB", action: {
         print("FOUND AKUL")
+        currentBulletinBoard = "akul"
     })
-    let p2 = MapPin(coordinate: CLLocationCoordinate2D(latitude: 0, longitude: 0), title: "18th avenue Library", subtitle: "NEW SUB", action: {
+    let p2 = MapPin(coordinate: CLLocationCoordinate2D(latitude: 0, longitude: 0), title: "18th avenue library", subtitle: "NEW SUB", action: {
         print("FOUND SWETHA")
+        currentBulletinBoard = "18th avenue library"
     })
     db.collection("Location").document("akul").getDocument {
         (document, error) in
