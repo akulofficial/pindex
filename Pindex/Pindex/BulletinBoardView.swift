@@ -26,7 +26,7 @@ struct BulletinBoardView: View {
                 .padding(EdgeInsets(top: 8, leading: 10, bottom: 20,
                 trailing: 10 ))
             }.sheet(isPresented: $showingPostView) {
-                PostView()
+                NewPost()
             }
         }
         .onDisappear(perform: {

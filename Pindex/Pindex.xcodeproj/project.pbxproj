@@ -131,13 +131,13 @@
 				9E90EB9E2367C01F00F0E6DA /* MapView.swift */,
 				9E22968B236E17ED002B2786 /* BulletinBoardView.swift */,
 				9E22968F236F1451002B2786 /* PostView.swift */,
+				3967ACFA2370D09600A42316 /* NewPost.swift */,
 				9E22968D236F1204002B2786 /* Post.swift */,
 				B12BFD8F23414790006DDD8F /* Assets.xcassets */,
 				B12BFD9423414790006DDD8F /* LaunchScreen.storyboard */,
 				B12BFD9723414790006DDD8F /* Info.plist */,
 				9E0679F02355F43900B11DA8 /* GoogleService-Info.plist */,
 				B12BFD9123414790006DDD8F /* Preview Content */,
-				3967ACFA2370D09600A42316 /* NewPost.swift */,
 			);
 			path = Pindex;
 			sourceTree = "<group>";

@@ -72,7 +72,7 @@ func addPins() -> [MapPin] {
     let p1 = MapPin(coordinate: CLLocationCoordinate2D(latitude: 0, longitude: 0), title: "AKUL", subtitle: "NEW SUB", action: {
         print("FOUND AKUL")
     })
-    let p2 = MapPin(coordinate: CLLocationCoordinate2D(latitude: 0, longitude: 0), title: "18th Avenue Library", subtitle: "NEW SUB", action: {
+    let p2 = MapPin(coordinate: CLLocationCoordinate2D(latitude: 0, longitude: 0), title: "18th avenue Library", subtitle: "NEW SUB", action: {
         print("FOUND SWETHA")
     })
     db.collection("Location").document("akul").getDocument {
