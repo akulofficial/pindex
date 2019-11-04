@@ -65,10 +65,14 @@ struct LoginView: View {
                            self.switchView = true
                        }) {
                            Text("Login")
+                            .padding(EdgeInsets(top: 15, leading: 10, bottom: 8,
+                                                trailing: 10 ))
                        }
                        
                        NavigationLink(destination: CreateAccountView()) {
                            Text("Create Account")
+                            .padding(EdgeInsets(top: 7, leading: 10, bottom: 8,
+                                                trailing: 10 ))
                        } // end of NavigationLink
                     
                     } // end of VStack
