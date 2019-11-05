@@ -18,6 +18,8 @@ struct NewPost: View {
     @State var eventContent = "Content"
     var datePosted = NSDate()
     var dateExpiry = NSDate()
+    
+    //@Binding var posts: [Post]?
 
     
     @State var data: String = "PLACEHOLDER"
@@ -48,6 +50,16 @@ struct NewPost: View {
                       "Date_Expiration": self.dateExpiry,
                       "ID" : currentBulletinBoard
                    ])
+                
+                /*
+                var idCount:Int = 0
+                if self.posts != nil {
+                    idCount = self.posts!.count
+                }
+                let p = Post.init(title: self.eventName, content: self.eventContent, id: idCount)
+                self.posts?.append(p)
+ */
+                
                   print("\n\nDocumentID: " + self.ref!.documentID)
                 self.presentationMode.wrappedValue.dismiss()
                }) {

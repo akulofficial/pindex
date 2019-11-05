@@ -8,11 +8,10 @@
 
 import Foundation
 
-
+// structure that will hold the specific post data to be displayed on the bulletin board
 struct Post {
     
-    var eventName = "name"
-    var date = NSDate()
-    var location = "location here"
+    var title, content: String
+    var id: Int
     
 } // end of Post

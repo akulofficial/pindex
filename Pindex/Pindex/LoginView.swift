@@ -23,7 +23,7 @@ func getNextView(nextViewStr: String) -> AnyView {
         print("cannot return bulletin currently")
         //returnView = AnyView(BulletinBoardView())
     case "post":
-        returnView = AnyView(PostView())
+        returnView = AnyView(PostView(post: Post(title: "fakePost", content: "fakeContent", id: -1)))
     default:
         print("ERROR: could not get the next view")
     }

@@ -10,28 +10,20 @@ import SwiftUI
 
 struct PostView: View {
     
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    var post: Post
     
     var body: some View {
-        NavigationView {
-            Text("Post here")
-            .navigationBarTitle("Make Post")
-            .navigationBarItems(leading:
-                Button("Post") {
-                print("Making the post")
-                self.presentationMode.wrappedValue.dismiss()
-            }, trailing:
-                Button("Cancel") {
-                print("Cancelling Post")
-                self.presentationMode.wrappedValue.dismiss()
-            })
+        
+        VStack (alignment: .leading) {
+            Text(post.content)
         }
+        .navigationBarTitle(post.title)
         
     }
 }
 
 struct PostView_Previews: PreviewProvider {
     static var previews: some View {
-        PostView()
+        PostView(post: Post(title: "fakePost", content: "fakeContent", id: -1))
     }
 }
