@@ -11,10 +11,125 @@ import FirebaseFirestore
 
 
 struct CreateAccountView: View {
+    
     @State var data: String = "PLACEHOLDER"
     @State var ref: DocumentReference? = nil
+    @State var firstName = ""
+    @State var lastName = ""
+    @State var username = ""
+    @State var password = ""
+    @State var confirmPassword = ""
+    @State var displayUsernameError:Bool = false
+    @State var displayPasswordsMatchError:Bool = false
+    
+    
     var body: some View {
         let stack = VStack{
+            
+            
+             Text("Create Account")
+                 .font(.title)
+             
+            TextField("First Name", text: $firstName)
+            .padding(EdgeInsets(top: 8, leading: 10, bottom: 8,
+                                trailing: 10 ))
+            .background(Color.white)
+            .clipShape(RoundedRectangle(cornerRadius: 8))
+            .shadow(radius: 8)
+            
+            TextField("Last Name", text: $lastName)
+            .padding(EdgeInsets(top: 8, leading: 10, bottom: 8,
+                                trailing: 10 ))
+            .background(Color.white)
+            .clipShape(RoundedRectangle(cornerRadius: 8))
+            .shadow(radius: 8)
+            
+            TextField("username", text: $username)
+                .padding(EdgeInsets(top: 8, leading: 10, bottom: 8,
+                                    trailing: 10 ))
+                .background(Color.white)
+                .clipShape(RoundedRectangle(cornerRadius: 8))
+                .shadow(radius: 8)
+             
+             SecureField("password", text: $password)
+             .padding(EdgeInsets(top: 8, leading: 10, bottom: 8,
+                                 trailing: 10 ))
+             .background(Color.white)
+             .clipShape(RoundedRectangle(cornerRadius: 8))
+             .shadow(radius: 8)
+            
+            SecureField("confirm password", text: $confirmPassword)
+            .padding(EdgeInsets(top: 8, leading: 10, bottom: 8,
+                                trailing: 10 ))
+            .background(Color.white)
+            .clipShape(RoundedRectangle(cornerRadius: 8))
+            .shadow(radius: 8)
+            
+            if displayUsernameError == true {
+                Text("That username already exists!")
+                .foregroundColor(Color.red)
+            }
+            
+            if displayPasswordsMatchError == true {
+                Text("The passwords did not match!")
+                .foregroundColor(Color.red)
+            }
+            
+            //Create button
+            Button(action: {
+                
+                self.displayPasswordsMatchError = false
+                self.displayUsernameError = false
+                
+                db.collection("User").whereField("Username", isEqualTo: self.username)
+                    .getDocuments() { (querySnapshot, err) in
+                        if let err = err {
+                            print("Error getting documents: \(err)")
+                        } else {
+                             
+                            var userExists:Bool = false
+                            
+                            // getting the login for username and password
+                            for document in querySnapshot!.documents {
+                                userExists = true
+                            } // end of for loop document in querySnapshot
+                            
+                            if userExists == false { // the user does not exist so try to create the account
+                                
+                                if self.password == self.confirmPassword { // the passwords match, create the account
+                                    
+                                    self.ref = db.collection("User").addDocument( data: [
+                                        "First_Name": self.firstName,
+                                        "Last_Name": self.lastName,
+                                        "ID": 0,
+                                        "Username": self.username,
+                                        "Password": self.password
+                                        
+                                    ])
+                                    print(self.ref!.documentID)
+                                    // ACCOUNT IS NOW CREATED
+                                    
+                                    
+                                    
+                                } else { // the passwords did not match, do not create the account
+                                    self.displayPasswordsMatchError = true
+                                }
+                                
+                            } else { // the user does exist display new username error
+                                self.displayUsernameError = true
+                            }
+                            
+                        } // end of if-else
+                } // end of db query
+                
+                
+                
+            }) {
+                Text("Create Account")
+            }
+            
+            
+            /*
             //Create button
             Button(action: {
                 self.ref = db.collection("User").addDocument( data: [
@@ -70,6 +185,10 @@ struct CreateAccountView: View {
                 Text("DELETE")
             }
             Text(data)
+ */
+            
+            
+            
         }
         return stack
     }

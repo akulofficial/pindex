@@ -19,8 +19,7 @@ struct NewPost: View {
     var datePosted = NSDate()
     var dateExpiry = NSDate()
     
-    //@Binding var posts: [Post]?
-
+    @Binding var posts: [Post]
     
     @State var data: String = "PLACEHOLDER"
     @State var ref: DocumentReference? = nil
@@ -50,6 +49,9 @@ struct NewPost: View {
                       "Date_Expiration": self.dateExpiry,
                       "ID" : currentBulletinBoard
                    ])
+                
+                let p = Post.init(title: self.eventName, content: self.eventContent, id: self.posts.count)
+                self.posts.append(p)
                 
                 /*
                 var idCount:Int = 0
@@ -81,8 +83,10 @@ struct NewPost: View {
     } // end of body
 }
 
+/*
 struct NewPost_Previews: PreviewProvider {
     static var previews: some View {
         NewPost()
     }
 }
+*/
