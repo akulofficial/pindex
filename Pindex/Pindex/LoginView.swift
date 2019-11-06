@@ -9,66 +9,86 @@
 import SwiftUI
 import Firebase
 
-var currentMainScreen:String = "Login" // used to return the specific screen that we want
-func getNextView(nextViewStr: String) -> AnyView {
-    var returnView:AnyView = AnyView(LoginView()) // initializing arbitrarily to login View
-    switch nextViewStr {
-    case "login":
-        returnView = AnyView(LoginView())
-    case "createAccount":
-        returnView = AnyView(CreateAccountView())
-    case "map":
-        returnView = AnyView(MapView())
-    case "bulletin":
-        print("cannot return bulletin currently")
-        //returnView = AnyView(BulletinBoardView())
-    case "post":
-        returnView = AnyView(PostView(post: Post(title: "fakePost", content: "fakeContent", id: -1)))
-    default:
-        print("ERROR: could not get the next view")
-    }
-    return returnView
-} // end of getNextView()
-
+var account:UserAccount?
 
 struct LoginView: View {
     
-    @State var username = "Username"
-    @State var password = "Password"
+    @State var username = ""
+    @State var password = ""
     @State var switchView = false // will change to true when the user taps a button to change the view
+    @State var isLoggedIn = false
+    @State var displayLoginError = false // will be true when the user enters a wrong username or password
 
     var body: some View {
         
         
-        if (switchView == false) { // show the login view
+        if switchView == false { // show the login view
             return AnyView(
                 
                 NavigationView {
                     VStack {
+                        
+                        Text("Pindex")
+                            .font(.title)
+                        
                        TextField("username", text: $username)
                            .padding(EdgeInsets(top: 8, leading: 10, bottom: 8,
                                                trailing: 10 ))
                            .background(Color.white)
                            .clipShape(RoundedRectangle(cornerRadius: 8))
                            .shadow(radius: 8)
-                       TextField("password", text: $password)
-                           .padding(EdgeInsets(top: 8, leading: 10, bottom: 8,
-                                               trailing: 10 ))
-                           .background(Color.white)
-                           .clipShape(RoundedRectangle(cornerRadius: 8))
-                           .shadow(radius: 8)
+                        
+                        SecureField("password", text: $password)
+                        .padding(EdgeInsets(top: 8, leading: 10, bottom: 8,
+                                            trailing: 10 ))
+                        .background(Color.white)
+                        .clipShape(RoundedRectangle(cornerRadius: 8))
+                        .shadow(radius: 8)
+                            
+                        if displayLoginError == true {
+                            Text("Username or password was incorrect")
+                            .foregroundColor(Color.red)
+                        }
                                
                        Button(action: {
                            // Closure will be called once user taps your button
                            print("Tapped the login button")
-                           currentMainScreen = "map"
-                           self.switchView = true
+                        
+                        db.collection("User").whereField("Username", isEqualTo: self.username).whereField("Password", isEqualTo: self.password)
+                                .getDocuments() { (querySnapshot, err) in
+                                    if let err = err {
+                                        print("Error getting documents: \(err)")
+                                    } else {
+                                         
+                                        // getting the login for username and password
+                                        for document in querySnapshot!.documents {
+                                            let documentDict = document.data()
+                                            print("\(document.documentID) => \(documentDict)")
+                                            
+                                            account = UserAccount.init(fName: documentDict["First_Name"] as! String,
+                                                lName: documentDict["Last_Name"] as! String,
+                                                username: documentDict["Username"] as! String)
+                                        } // end of for loop document in querySnapshot
+                                        
+                                        if account != nil { // the user successfully logged in
+                                            self.isLoggedIn = true
+                                            self.displayLoginError = false
+                                            self.switchView = true
+                                        } else { // the user name or password was wrong
+                                            self.displayLoginError = true
+                                        }
+                                        
+                                    } // end of if-else
+                            } // end of db query
+                           
                        }) {
                            Text("Login")
                             .padding(EdgeInsets(top: 15, leading: 10, bottom: 8,
                                                 trailing: 10 ))
                        }
                        
+                        
+                       Text("Don't have and account?")
                        NavigationLink(destination: CreateAccountView()) {
                            Text("Create Account")
                             .padding(EdgeInsets(top: 7, leading: 10, bottom: 8,
@@ -83,7 +103,7 @@ struct LoginView: View {
                 
             ) // end of AnyView()
         } else { // show the next view
-            return getNextView(nextViewStr: currentMainScreen)
+            return AnyView(MapView(isLoggedIn: self.$isLoggedIn))
         }
         
     } // end of body view
@@ -94,3 +114,12 @@ struct LoginView_Previews: PreviewProvider {
         LoginView()
     }
 }
+
+
+struct UserAccount {
+    
+    var fName, lName, username: String
+    
+    // password and id currently not included in this model by design
+    
+} // end of Post

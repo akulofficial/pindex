@@ -14,8 +14,8 @@ struct NewPost: View {
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
-    @State var eventName = "Name"
-    @State var eventContent = "Content"
+    @State var eventName = ""
+    @State var eventContent = ""
     var datePosted = NSDate()
     var dateExpiry = NSDate()
     

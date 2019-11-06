@@ -29,33 +29,55 @@ struct MapView: View {
     @State var pins: [MapPin] = addPins()
     @State var selectedPin: MapPin?
     @State var action: Int? = 0 // used to force navigation link to "be tapped"
+    @State var switchToLogin: Bool = false // will become true when the user taps the logout button
+    
+    @Binding var isLoggedIn: Bool
 
     var body: some View {
         
-        NavigationView {
-            VStack {
-                Map(pins: $pins, selectedPin: $selectedPin)
-                    .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
-                if selectedPin != nil {
-                    //Text(verbatim: "Welcome to \(selectedPin?.title ?? "???")!")
-                    Text("")
-                    .opacity(0.0)
-                    .onAppear(perform: {self.action = 1})
-                }
+        if switchToLogin == false { // the regular map screen should be displayed
+            
+            return AnyView(
+            
+                NavigationView {
+                    VStack {
+                        Map(pins: $pins, selectedPin: $selectedPin)
+                            .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
+                        if selectedPin != nil {
+                            //Text(verbatim: "Welcome to \(selectedPin?.title ?? "???")!")
+                            Text("")
+                            .opacity(0.0)
+                            .onAppear(perform: {self.action = 1})
+                        }
+                        
+                        
+                        NavigationLink(destination: BulletinBoardView(mapAction: $action), tag: 1, selection: $action) {
+                            EmptyView()
+                        }
+                    }
+                    .navigationBarTitle("Find Bulletins")
+                    .navigationBarItems(trailing:
+                    Button(action: {
+                        self.isLoggedIn = false
+                        account = nil
+                        self.switchToLogin = true
+                    }) {
+                        Text("Log Out")
+                        .padding(EdgeInsets(top: 12, leading: 10, bottom: 20,
+                        trailing: 10 ))
+                    })
+                    .onAppear(perform: {self.action = 0}) // resetting so that the user may tap the annotation again
+                    .onDisappear(perform: {self.selectedPin = nil}) // resetting so that the user may tap the bulletin again and it is not already selected
                 
-                
-                NavigationLink(destination: BulletinBoardView(mapAction: $action), tag: 1, selection: $action) {
-                    EmptyView()
-                }
-            }
-            .navigationBarTitle("Find Bulletins")
-            .onAppear(perform: {self.action = 0}) // resetting so that the user may tap the annotation again
-            .onDisappear(perform: {self.selectedPin = nil}) // resetting so that the user may tap the bulletin again and it is not already selected
-        
+                } // end of Navigation View
+            
+            )
+            
+        } else { // the Login screen should be displayed
+            return AnyView(LoginView())
         }
  
     } // end of body
-
 } // end of MapView
 
 /*
