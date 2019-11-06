@@ -12,6 +12,8 @@ import FirebaseFirestore
 
 struct CreateAccountView: View {
     
+    @Environment(\.presentationMode) var mode: Binding<PresentationMode>
+    
     @State var data: String = "PLACEHOLDER"
     @State var ref: DocumentReference? = nil
     @State var firstName = ""
@@ -109,7 +111,7 @@ struct CreateAccountView: View {
                                     print(self.ref!.documentID)
                                     // ACCOUNT IS NOW CREATED
                                     
-                                    
+                                    self.mode.wrappedValue.dismiss()
                                     
                                 } else { // the passwords did not match, do not create the account
                                     self.displayPasswordsMatchError = true
