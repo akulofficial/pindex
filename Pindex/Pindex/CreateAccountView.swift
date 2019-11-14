@@ -22,7 +22,91 @@ struct CreateAccountView: View {
     @State var password = ""
     @State var confirmPassword = ""
     @State var displayUsernameError:Bool = false
+    @State var displayUsernameFormatError:Bool = false
+    @State var displayPasswordFormatError:Bool = false
     @State var displayPasswordsMatchError:Bool = false
+    @State var displayFirstNameError:Bool = false
+    @State var displayLastNameError:Bool = false
+    
+    
+    func processInput() {
+            displayPasswordsMatchError = false
+            displayUsernameFormatError = false
+            displayPasswordFormatError = false
+            displayUsernameError = false
+            displayLastNameError = false
+            displayFirstNameError = false
+            
+        
+             //var nameRegex = "[^A-Za-z]{2,}$"
+            //displayFirstNameError =  !NSPredicate(format: "firstName == %@" , nameRegex).evaluate(with: firstName)
+            //displayLastNameError =  !NSPredicate(format: "lastName == %@" , nameRegex).evaluate(with: lastName)
+           var passwordRegex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d\\W]{8,}$"
+           displayPasswordFormatError =  !NSPredicate(format: "SELF MATCHES %@" , passwordRegex).evaluate(with: password)
+            var userNameRegex = "[^A-Za-z0-9]{5,}$"
+            displayUsernameFormatError = !NSPredicate(format: "SELF MATCHES %@", userNameRegex).evaluate(with: username)
+            //print("displayPasswordFormatError: \(displayPasswordFormatError)")
+            
+            if (displayPasswordFormatError == false && displayUsernameFormatError == false ) {
+               db.collection("User").whereField("Username", isEqualTo: self.username)
+                   .getDocuments() { (querySnapshot, err) in
+                       if let err = err {
+                           print("Error getting documents: \(err)")
+                       } else {
+                            
+                           var userExists:Bool = false
+                           
+                           // getting the login for username and password
+                           for document in querySnapshot!.documents {
+                               userExists = true
+                           } // end of for loop document in querySnapshot
+                           
+                        if userExists == false &&
+                            self.displayPasswordsMatchError == false &&
+                            self.displayUsernameFormatError == false &&
+                            self.displayPasswordFormatError == false &&
+                            self.displayUsernameError == false &&
+                            self.displayLastNameError == false &&
+                            self.displayFirstNameError == false { // the user does not exist so try to create the account
+                               
+                            if self.password == self.confirmPassword { // the passwords match, create the account
+                                   
+                                   self.ref = db.collection("User").addDocument( data: [
+                                       "First_Name": self.firstName,
+                                       "Last_Name": self.lastName,
+                                       "ID": 0,
+                                       "Username": self.username,
+                                       "Password": self.password
+                                       
+                                   ])
+                                   print(self.ref!.documentID)
+                                   // ACCOUNT IS NOW CREATED
+                                   
+                                   self.mode.wrappedValue.dismiss()
+                                   
+                               } else { // the passwords did not match, do not create the account
+                                   self.displayPasswordsMatchError = true
+                               }
+                               
+                           } else { // the user does exist display new username error
+                               self.displayUsernameError = true
+                           }
+                           
+                    } // end of if-else
+                    
+               } // end of db query
+            }
+               
+               
+    }
+    
+    func checkPasswordFormat() {
+        
+    }
+    
+    func checkUsernameFormat() {
+        
+    }
     
     
     var body: some View {
@@ -72,6 +156,16 @@ struct CreateAccountView: View {
                 .foregroundColor(Color.red)
             }
             
+//            if displayPasswordFormatError == true {
+//                Text("Password must contain an uppercase letter, lowercase letter, a number, and a special character")
+//                .foregroundColor(Color.red)
+//            }
+
+            if displayUsernameFormatError == true {
+                Text("The username must contain at least 5 characters.")
+                .foregroundColor(Color.red)
+            }
+            
             if displayPasswordsMatchError == true {
                 Text("The passwords did not match!")
                 .foregroundColor(Color.red)
@@ -80,114 +174,11 @@ struct CreateAccountView: View {
             //Create button
             Button(action: {
                 
-                self.displayPasswordsMatchError = false
-                self.displayUsernameError = false
-                
-                db.collection("User").whereField("Username", isEqualTo: self.username)
-                    .getDocuments() { (querySnapshot, err) in
-                        if let err = err {
-                            print("Error getting documents: \(err)")
-                        } else {
-                             
-                            var userExists:Bool = false
-                            
-                            // getting the login for username and password
-                            for document in querySnapshot!.documents {
-                                userExists = true
-                            } // end of for loop document in querySnapshot
-                            
-                            if userExists == false { // the user does not exist so try to create the account
-                                
-                                if self.password == self.confirmPassword { // the passwords match, create the account
-                                    
-                                    self.ref = db.collection("User").addDocument( data: [
-                                        "First_Name": self.firstName,
-                                        "Last_Name": self.lastName,
-                                        "ID": 0,
-                                        "Username": self.username,
-                                        "Password": self.password
-                                        
-                                    ])
-                                    print(self.ref!.documentID)
-                                    // ACCOUNT IS NOW CREATED
-                                    
-                                    self.mode.wrappedValue.dismiss()
-                                    
-                                } else { // the passwords did not match, do not create the account
-                                    self.displayPasswordsMatchError = true
-                                }
-                                
-                            } else { // the user does exist display new username error
-                                self.displayUsernameError = true
-                            }
-                            
-                        } // end of if-else
-                } // end of db query
-                
-                
+                self.processInput()
                 
             }) {
                 Text("Create Account")
             }
-            
-            
-            /*
-            //Create button
-            Button(action: {
-                self.ref = db.collection("User").addDocument( data: [
-                    "First_Name": "test",
-                    "Last_Name": "test",
-                    "ID": 0
-                ])
-                print(self.ref!.documentID)
-            }) {
-                Text("CREATE")
-            }
-            
-            //Read button
-            Button(action: {
-                db.collection("User").document(self.ref!.documentID).getDocument {
-                    (document, error) in
-                    if let document = document, document.exists {
-                        self.data = document.data().map(String.init(describing:)) ?? "nil"
-                        print("Document data: \(self.data)")
-                        print(self.ref!.documentID)
-                    } else {
-                        print("Document does not exist")
-                    }
-                }
-                print("ref.docID after read: " + self.ref!.documentID)
-            }) {
-                Text("READ")
-            }
-            
-            //Update button
-            Button(action: {
-                db.collection("User").document(self.ref!.documentID).updateData([
-                    "First_Name": "updated_test"
-                ])
-                print(self.ref!.documentID)
-            }) {
-                Text("UPDATE")
-            }
-            
-            //Delete button
-            Button(action:{
-                print("BEFORE DELETION")
-                print(self.ref!.documentID)
-                db.collection("User").document(self.ref!.documentID).delete() { err in
-                    if let err = err {
-                        print("Error removing document: \(err)")
-                    } else {
-                        print("Document successfully removed!")
-                    }
-                }
-                print(self.ref!.documentID)
-            }) {
-                Text("DELETE")
-            }
-            Text(data)
- */
             
             
             
@@ -195,6 +186,9 @@ struct CreateAccountView: View {
         return stack
     }
 }
+
+
+
 struct CreateAccountView_Previews: PreviewProvider {
     static var previews: some View {
         CreateAccountView()
