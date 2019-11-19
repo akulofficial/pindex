@@ -9,6 +9,7 @@
 import XCTest
 @testable import Pindex
 
+
 var sut: CreateAccountView!
 class PindexTests: XCTestCase {
     var sut: CreateAccountView!
@@ -28,35 +29,44 @@ class PindexTests: XCTestCase {
         sut.firstName = "Harry"
         sut.lastName = "Potter"
         sut.username = ""
-        sut.password = "Hogwarts"
-        sut.confirmPassword = "Hogwarts"
-        sut.displayPasswordsMatchError = false
-        sut.processInput()
-        XCTAssertEqual(sut.displayUsernameFormatError, true, "Username must not be empty")
+        sut.password = "Hogwarts123!"
+        sut.confirmPassword = "Hogwarts123!"
+        let testResult = sut.isUsernameValid(username: sut.username)
+        XCTAssertEqual(testResult, false, "Username must not be empty")
     }
 
     func testEmptyPassword() {
           sut.firstName = "Harry"
           sut.lastName = "Potter"
           sut.username = "Harry"
-          sut.password = " "
+          sut.password = ""
           sut.confirmPassword = ""
-          sut.displayPasswordsMatchError = false
-          sut.processInput()
-          XCTAssertEqual(sut.displayPasswordFormatError, true, "Password must not be empty")
+          let testResult = sut.isPasswordValid(password: sut.password)
+          XCTAssertEqual(testResult, false, "Password must not be empty")
       }
 
-    func testNormal() {
-            sut.firstName = "Harry"
-            sut.lastName = "Potter"
-            sut.username = "Harry"
-            sut.password = "Gryffindor"
-            sut.confirmPassword = "Gryffindor"
-            sut.processInput()
-            XCTAssertEqual(sut.displayPasswordFormatError, false, "No errors should occur")
+    func testUsernameNormal() {
+        sut.firstName = "Harry"
+        sut.lastName = "Potter"
+        sut.username = "Harryf"
+        sut.password = "1"
+        sut.confirmPassword = "1"
+        let testResult = sut.isUsernameValid(username: sut.username)
+        XCTAssertEqual(testResult, false, "No errors should occur")
+    }
+    
+    func testPasswordNormal() {
+        sut.firstName = "Harry"
+        sut.lastName = "Potter"
+        sut.username = "Harry"
+        sut.password = "Gryffindor01"
+        sut.confirmPassword = "Gryffindor01"
+        let testResult = sut.isPasswordValid(password: sut.password)
+        XCTAssertEqual(testResult, false, "No errors should occur")
     }
 
     func testNonMatchingPassword() {
+            //displayPasswordFormmatErrorTest = 
             sut.firstName = "Harry"
             sut.lastName = "Potter"
             sut.username = "Harry"

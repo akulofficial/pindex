@@ -8,7 +8,13 @@
 import SwiftUI
 import Firebase
 import FirebaseFirestore
+import UIKit
 
+// Global booleans for testing purposes
+//var displayUsernameErrorTest:Bool = false
+//var displayUsernameFormatErrorTest:Bool = false
+//var displayPasswordFormatErrorTest:Bool = false
+//var displayPasswordsMatchErrorTest:Bool = false
 
 struct CreateAccountView: View {
     
@@ -25,27 +31,15 @@ struct CreateAccountView: View {
     @State var displayUsernameFormatError:Bool = false
     @State var displayPasswordFormatError:Bool = false
     @State var displayPasswordsMatchError:Bool = false
-    @State var displayFirstNameError:Bool = false
-    @State var displayLastNameError:Bool = false
     
     
     func processInput() {
-            displayPasswordsMatchError = false
-            displayUsernameFormatError = false
-            displayPasswordFormatError = false
-            displayUsernameError = false
-            displayLastNameError = false
-            displayFirstNameError = false
-            
         
-             //var nameRegex = "[^A-Za-z]{2,}$"
-            //displayFirstNameError =  !NSPredicate(format: "firstName == %@" , nameRegex).evaluate(with: firstName)
-            //displayLastNameError =  !NSPredicate(format: "lastName == %@" , nameRegex).evaluate(with: lastName)
-           var passwordRegex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d\\W]{8,}$"
-           displayPasswordFormatError =  !NSPredicate(format: "SELF MATCHES %@" , passwordRegex).evaluate(with: password)
-            var userNameRegex = "[^A-Za-z0-9]{5,}$"
-            displayUsernameFormatError = !NSPredicate(format: "SELF MATCHES %@", userNameRegex).evaluate(with: username)
-            //print("displayPasswordFormatError: \(displayPasswordFormatError)")
+        displayUsernameError = false
+        displayUsernameFormatError = !isUsernameValid(username: username)
+        displayPasswordFormatError = !isPasswordValid(password: password)
+        displayPasswordsMatchError = false
+        
             
             if (displayPasswordFormatError == false && displayUsernameFormatError == false ) {
                db.collection("User").whereField("Username", isEqualTo: self.username)
@@ -65,9 +59,7 @@ struct CreateAccountView: View {
                             self.displayPasswordsMatchError == false &&
                             self.displayUsernameFormatError == false &&
                             self.displayPasswordFormatError == false &&
-                            self.displayUsernameError == false &&
-                            self.displayLastNameError == false &&
-                            self.displayFirstNameError == false { // the user does not exist so try to create the account
+                            self.displayUsernameError == false { // the user does not exist so try to create the account
                                
                             if self.password == self.confirmPassword { // the passwords match, create the account
                                    
@@ -100,13 +92,43 @@ struct CreateAccountView: View {
                
     }
     
-    func checkPasswordFormat() {
-        
-    }
     
-    func checkUsernameFormat() {
+    
+    func isUsernameValid(username: String) -> Bool {
+
+        let usernameRegexPattern = "(?=.*[a-zA-Z0-9]).{5,20}" // "(?=.*[a-zA-Z0-9]).{5,20}"
+        // letters and numbers and less than 20 characters long
+
+        var isValid:Bool?
+
+        let doesItMatch = NSPredicate(format: "SELF MATCHES %@", usernameRegexPattern).evaluate(with: username)
+        if doesItMatch == false {
+            isValid = false
+        } else {
+            isValid = true
+        }
         
-    }
+        return isValid!
+    } // end of isUsernameValid()
+    
+    
+    func isPasswordValid(password: String) -> Bool {
+
+        let passwordRegexPattern = "(?=.*[A-Z])(?=.*[0-9])(?=.*[a-z]).{8,}"
+        // one upper case letter, one lower case, one digit and 8 characters long
+
+        var isValid:Bool?
+
+        let doesItMatch = NSPredicate(format: "SELF MATCHES %@", passwordRegexPattern).evaluate(with: password)
+        if doesItMatch == false {
+            isValid = false
+        } else {
+            isValid = true
+        }
+
+        return isValid!
+        
+    } // end of isPasswordValid()
     
     
     var body: some View {
@@ -137,6 +159,7 @@ struct CreateAccountView: View {
                 .clipShape(RoundedRectangle(cornerRadius: 8))
                 .shadow(radius: 8)
              
+          
              SecureField("password", text: $password)
              .padding(EdgeInsets(top: 8, leading: 10, bottom: 8,
                                  trailing: 10 ))
@@ -150,26 +173,30 @@ struct CreateAccountView: View {
             .background(Color.white)
             .clipShape(RoundedRectangle(cornerRadius: 8))
             .shadow(radius: 8)
-            
-            if displayUsernameError == true {
-                Text("That username already exists!")
-                .foregroundColor(Color.red)
-            }
-            
-//            if displayPasswordFormatError == true {
-//                Text("Password must contain an uppercase letter, lowercase letter, a number, and a special character")
-//                .foregroundColor(Color.red)
-//            }
+        
+            if true == true {
+                if displayPasswordsMatchError == true {
+                    Text("The passwords did not match!")
+                    .foregroundColor(Color.red)
+                }
+                
+                if displayUsernameError == true {
+                    Text("That username already exists!")
+                    .foregroundColor(Color.red)
+                }
 
-            if displayUsernameFormatError == true {
-                Text("The username must contain at least 5 characters.")
-                .foregroundColor(Color.red)
+                if displayUsernameFormatError == true {
+                    Text("The username must contain between 5-20 characters (only digits and letters allowed).")
+                    .foregroundColor(Color.red)
+                }
+                
+                if  displayPasswordFormatError == true {
+                    Text("Password must contain an uppercase letter, lowercase letter, a number, and a special character")
+                    .foregroundColor(Color.red)
+                }
             }
             
-            if displayPasswordsMatchError == true {
-                Text("The passwords did not match!")
-                .foregroundColor(Color.red)
-            }
+           
             
             //Create button
             Button(action: {
@@ -178,19 +205,20 @@ struct CreateAccountView: View {
                 
             }) {
                 Text("Create Account")
-            }
+            } // end of button
             
             
             
-        }
+        } // end of stack
         return stack
-    }
-}
+    } // end of body
+} // end of CreateAccountView
 
 
-
+/*
 struct CreateAccountView_Previews: PreviewProvider {
     static var previews: some View {
         CreateAccountView()
     }
 }
+*/
