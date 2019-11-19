@@ -66,25 +66,21 @@ class PindexTests: XCTestCase {
     }
 
     func testNonMatchingPassword() {
-            //displayPasswordFormmatErrorTest = 
-            sut.firstName = "Harry"
-            sut.lastName = "Potter"
-            sut.username = "Harry"
-            sut.password = "Gryffindor01!"
-            sut.confirmPassword = "Gryffindor10"
-            sut.processInput()
-            XCTAssertEqual(sut.displayPasswordsMatchError, true, "Both passwords must match")
+            let password = "Gryffindor01"
+            let confirmPassword = "Gryffindor10"
+            let testResult = sut.isPasswordMatch(passwordOne: password, passwordTwo: confirmPassword)
+            XCTAssertEqual(testResult,  false, "Both passwords must match")
     }
 
-    func invalidUsernameError() {
-            sut.firstName = "Harry"
-            sut.lastName = "Potter"
-            sut.username = ""
-            sut.password = "Gryffindor01"
-            sut.confirmPassword = "Gryffindor01"
-            sut.processInput()
-            XCTAssertEqual(sut.displayUsernameFormatError, true, "Blank username should not be allowed")
-    }
+//    func invalidUsernameError() {
+//            sut.firstName = "Harry"
+//            sut.lastName = "Potter"
+//            sut.username = ""
+//            sut.password = "Gryffindor01"
+//            sut.confirmPassword = "Gryffindor01"
+//            sut.processInput()
+//            XCTAssertEqual(sut.displayUsernameFormatError, true, "Blank username should not be allowed")
+//    }
 
 //    func invalidFirstNameError() {
 //              sut.firstName = ""

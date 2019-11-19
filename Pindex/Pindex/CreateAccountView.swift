@@ -38,7 +38,7 @@ struct CreateAccountView: View {
         displayUsernameError = false
         displayUsernameFormatError = !isUsernameValid(username: username)
         displayPasswordFormatError = !isPasswordValid(password: password)
-        displayPasswordsMatchError = false
+        displayPasswordsMatchError = !isPasswordMatch(passwordOne: password, passwordTwo: confirmPassword)
         
             
             if (displayPasswordFormatError == false && displayUsernameFormatError == false ) {
@@ -130,6 +130,15 @@ struct CreateAccountView: View {
         
     } // end of isPasswordValid()
     
+    func isPasswordMatch(passwordOne: String, passwordTwo: String) -> Bool {
+        var doesMatch:Bool?
+        if passwordOne == passwordTwo {
+            doesMatch = true
+        } else {
+            doesMatch = false
+        }
+        return doesMatch!
+    }
     
     var body: some View {
         let stack = VStack{
