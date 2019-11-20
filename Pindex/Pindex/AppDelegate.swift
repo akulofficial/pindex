@@ -9,9 +9,10 @@
 import UIKit
 import FirebaseCore
 import FirebaseFirestore
-//import FBSDKCoreKit
+import BCryptSwift
 
 var db: Firestore = Firestore.firestore();
+var salt:String = "$2a$10$klnsfCDZT0nnQeMHl0R2pu"
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -20,6 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         print("App started (AppDelegate)")
         FirebaseApp.configure()
+        
         return true
     }
 
@@ -39,3 +41,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
 }
+

@@ -8,6 +8,7 @@
 
 import SwiftUI
 import Firebase
+import BCryptSwift
 
 var account:UserAccount?
 
@@ -20,7 +21,6 @@ struct LoginView: View {
     @State var displayLoginError = false // will be true when the user enters a wrong username or password
 
     var body: some View {
-        
         
         if switchView == false { // show the login view
             return AnyView(
@@ -54,7 +54,7 @@ struct LoginView: View {
                            // Closure will be called once user taps your button
                            print("Tapped the login button")
                         
-                        db.collection("User").whereField("Username", isEqualTo: self.username).whereField("Password", isEqualTo: self.password)
+                        db.collection("User").whereField("Username", isEqualTo: self.username).whereField("Password", isEqualTo: BCryptSwift.hashPassword(self.password, withSalt: salt))
                                 .getDocuments() { (querySnapshot, err) in
                                     if let err = err {
                                         print("Error getting documents: \(err)")
@@ -123,3 +123,6 @@ struct UserAccount {
     // password and id currently not included in this model by design
     
 } // end of Post
+
+
+

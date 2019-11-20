@@ -9,6 +9,7 @@ import SwiftUI
 import Firebase
 import FirebaseFirestore
 import UIKit
+import BCryptSwift
 
 // Global booleans for testing purposes
 //var displayUsernameErrorTest:Bool = false
@@ -68,7 +69,7 @@ struct CreateAccountView: View {
                                        "Last_Name": self.lastName,
                                        "ID": 0,
                                        "Username": self.username,
-                                       "Password": self.password
+                                       "Password": BCryptSwift.hashPassword(self.password, withSalt: salt)
                                        
                                    ])
                                    print(self.ref!.documentID)
@@ -200,8 +201,10 @@ struct CreateAccountView: View {
                 }
                 
                 if  displayPasswordFormatError == true {
-                    Text("Password must contain an uppercase letter, lowercase letter, a number, and a special character")
+                    Text("Password must contain an uppercase letter, lowercase letter, a number, and be at least 8 characters long.")
                     .foregroundColor(Color.red)
+                    .padding(EdgeInsets(top: 8, leading: 0, bottom: 8,
+                    trailing: 30 ))
                 }
             }
             
@@ -231,3 +234,6 @@ struct CreateAccountView_Previews: PreviewProvider {
     }
 }
 */
+
+
+

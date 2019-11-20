@@ -1,4 +1,5 @@
 PODS:
+  - BCryptSwift (1.1)
   - BoringSSL-GRPC (0.0.3):
     - BoringSSL-GRPC/Implementation (= 0.0.3)
     - BoringSSL-GRPC/Interface (= 0.0.3)
@@ -124,6 +125,7 @@ PODS:
   - Protobuf (3.10.0)
 
 DEPENDENCIES:
+  - BCryptSwift
   - Firebase/Auth
   - Firebase/Core
   - Firebase/Database
@@ -131,6 +133,7 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
+    - BCryptSwift
     - BoringSSL-GRPC
     - Firebase
     - FirebaseAnalytics
@@ -154,6 +157,7 @@ SPEC REPOS:
     - Protobuf
 
 SPEC CHECKSUMS:
+  BCryptSwift: f69992ea5685f6714260842c2770688043b89ab2
   BoringSSL-GRPC: db8764df3204ccea016e1c8dd15d9a9ad63ff318
   Firebase: 5e6b7b12bf9adb90986688edc06b156c37e109cd
   FirebaseAnalytics: 0e3ecff2c5d86070f7d4325e21f1edabfbd558dc
@@ -176,6 +180,6 @@ SPEC CHECKSUMS:
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   Protobuf: a4dc852ad69c027ca2166ed287b856697814375b
 
-PODFILE CHECKSUM: 692b29fa9a1f61fa7397ea25eb825b957b98e469
+PODFILE CHECKSUM: a28772e83ad8dfbe86bcc26a5f509218bdcfcf64
 
 COCOAPODS: 1.8.3
