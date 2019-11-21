@@ -61,6 +61,7 @@ struct NewPost: View {
             
             } // end of Form
         } // end of NavigationView
+        .environment(\.horizontalSizeClass, .compact) 
     } // end of body
 } //end of NewPost
 

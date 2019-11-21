@@ -88,6 +88,7 @@ struct LoginView: View {
                      .navigationBarTitle(Text("Welcome to Pindex!"))
                         
                 } // end of NavigationView
+                .environment(\.horizontalSizeClass, .compact) 
             ) // end of AnyView()
         } else { // show the next view
             return AnyView(MapView(isLoggedIn: self.$isLoggedIn))

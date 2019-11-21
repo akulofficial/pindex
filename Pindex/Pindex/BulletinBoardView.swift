@@ -12,7 +12,6 @@ import FirebaseFirestore
 
 struct BulletinBoardView: View {
     @State var showingPostView = false
-    //@State var posts = getPosts()
     @Binding var mapAction: Int?
     
     @State var posts:[Post] = [] // array that will hold all posts for the current bulletin
@@ -29,11 +28,11 @@ struct BulletinBoardView: View {
             } // end of list
         }
         .onAppear(perform: {
-            //self.getPosts()
             self.loadPostsWithPaging()
         })
         .onDisappear(perform: {
             self.mapAction = 0 // resetting so that the user may tap the annotation again
+            self.posts.removeAll() //clears the posts
             needToCenterLocation = true // resetting so that the map centers back on the user when the view swithces back
         })
         .navigationBarTitle(currentBulletinBoard)
@@ -48,7 +47,7 @@ struct BulletinBoardView: View {
         
     }
     
-    
+    //DEPRECATED
     func getPosts(){
         
         self.posts.removeAll() // need to remove all posts from collection
@@ -80,6 +79,8 @@ struct BulletinBoardView: View {
     
     // called in place of getPosts()
     func loadPostsWithPaging() {
+        
+        self.posts.removeAll() // need to remove all old posts before loading new ones
      
         let numOfPosts:Int = getNumberOfPosts() // getting the number of posts for this bulletin board
         var count = 0

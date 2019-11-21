@@ -68,7 +68,7 @@ struct MapView: View {
                     .onDisappear(perform: {self.selectedPin = nil}) // resetting so that the user may tap the bulletin again and it is not already selected
                 
                 } // end of Navigation View
-            
+                    .environment(\.horizontalSizeClass, .compact)
             )
             
         } else { // the Login screen should be displayed

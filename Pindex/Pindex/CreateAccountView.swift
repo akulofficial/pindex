@@ -191,6 +191,7 @@ struct CreateAccountView: View {
                 } //end of form
                 .navigationBarTitle(Text("Create Account"))
             } //end of NavigationView
+            .environment(\.horizontalSizeClass, .compact) 
         ) // end of AnyView
     } // end of body
 } // end of CreateAccountView
