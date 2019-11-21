@@ -63,8 +63,6 @@ struct MapView: View {
                         self.switchToLogin = true
                     }) {
                         Text("Log Out")
-                        .padding(EdgeInsets(top: 12, leading: 10, bottom: 20,
-                        trailing: 10 ))
                     })
                     .onAppear(perform: {self.action = 0}) // resetting so that the user may tap the annotation again
                     .onDisappear(perform: {self.selectedPin = nil}) // resetting so that the user may tap the bulletin again and it is not already selected
@@ -190,7 +188,7 @@ struct Map: UIViewRepresentable {
         if (center == nil) {
             center = CLLocationCoordinate2D(latitude: 40, longitude: -82)
         }
-        let span = MKCoordinateSpan(latitudeDelta: 1.0, longitudeDelta: 1.0)
+        let span = MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02)
         let region = MKCoordinateRegion(center: center!, span: span)
         uiView.setRegion(region, animated: true)
         uiView.showsUserLocation = true

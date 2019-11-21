@@ -9,20 +9,17 @@
 import UIKit
 import FirebaseCore
 import FirebaseFirestore
-import BCryptSwift
+//import FBSDKCoreKit
 
 var db: Firestore = Firestore.firestore();
-var salt:String = "$2a$10$klnsfCDZT0nnQeMHl0R2pu"
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-    
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         print("App started (AppDelegate)")
         FirebaseApp.configure()
-        
         return true
     }
 
@@ -42,4 +39,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
 }
-

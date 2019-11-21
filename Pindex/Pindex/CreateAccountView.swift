@@ -10,6 +10,7 @@ import Firebase
 import FirebaseFirestore
 import UIKit
 import BCryptSwift
+import Combine
 
 // Global booleans for testing purposes
 //var displayUsernameErrorTest:Bool = false
@@ -91,7 +92,7 @@ struct CreateAccountView: View {
             }
                
                
-    }
+    } //end of process-input
     
     
     
@@ -142,89 +143,58 @@ struct CreateAccountView: View {
     }
     
     var body: some View {
-        let stack = VStack{
-            
-            
-             Text("Create Account")
-                 .font(.title)
-             
-            TextField("First Name", text: $firstName)
-            .padding(EdgeInsets(top: 8, leading: 10, bottom: 8,
-                                trailing: 10 ))
-            .background(Color.white)
-            .clipShape(RoundedRectangle(cornerRadius: 8))
-            .shadow(radius: 8)
-            
-            TextField("Last Name", text: $lastName)
-            .padding(EdgeInsets(top: 8, leading: 10, bottom: 8,
-                                trailing: 10 ))
-            .background(Color.white)
-            .clipShape(RoundedRectangle(cornerRadius: 8))
-            .shadow(radius: 8)
-            
-            TextField("username", text: $username)
-                .padding(EdgeInsets(top: 8, leading: 10, bottom: 8,
-                                    trailing: 10 ))
-                .background(Color.white)
-                .clipShape(RoundedRectangle(cornerRadius: 8))
-                .shadow(radius: 8)
-             
-          
-             SecureField("password", text: $password)
-             .padding(EdgeInsets(top: 8, leading: 10, bottom: 8,
-                                 trailing: 10 ))
-             .background(Color.white)
-             .clipShape(RoundedRectangle(cornerRadius: 8))
-             .shadow(radius: 8)
-            
-            SecureField("confirm password", text: $confirmPassword)
-            .padding(EdgeInsets(top: 8, leading: 10, bottom: 8,
-                                trailing: 10 ))
-            .background(Color.white)
-            .clipShape(RoundedRectangle(cornerRadius: 8))
-            .shadow(radius: 8)
-        
-            if true == true {
-                if displayPasswordsMatchError == true {
-                    Text("The passwords did not match!")
-                    .foregroundColor(Color.red)
-                }
-                
-                if displayUsernameError == true {
-                    Text("That username already exists!")
-                    .foregroundColor(Color.red)
-                }
+        return AnyView(
+            NavigationView {
+                Form {
+                    Section(header: Text("Name")) {
+                        TextField("First Name", text: $firstName)
+                        TextField("Last Name", text: $lastName)
+                    }
+                    
+                    Section(header: Text("Username")) {
+                        TextField("Username", text: $username)
+                    }
+                  
+                    Section(header: Text("Password")) {
+                        SecureField("Password", text: $password)
+                        SecureField("Confirm Password", text: $confirmPassword)
+                    }
+                    
+                    if displayPasswordsMatchError == true {
+                        Text("The passwords did not match!")
+                        .foregroundColor(Color.red)
+                    }
+                    
+                    if displayUsernameError == true {
+                        Text("That username already exists!")
+                        .foregroundColor(Color.red)
+                    }
 
-                if displayUsernameFormatError == true {
-                    Text("The username must contain between 5-20 characters (only digits and letters allowed).")
-                    .foregroundColor(Color.red)
-                }
+                    if displayUsernameFormatError == true {
+                        Text("The username must contain between 5-20 characters (only digits and letters allowed).")
+                        .foregroundColor(Color.red)
+                    }
+                    
+                    if  displayPasswordFormatError == true {
+                        Text("Password must contain an uppercase letter, lowercase letter, a number, and be at least 8 characters long.")
+                        .foregroundColor(Color.red)
+                    }
+                    
+                    //Create button
+                    Button(action: {
+                        self.processInput()
+                    }) {
+                        Text("Create Account")
+                    } // end of button
                 
-                if  displayPasswordFormatError == true {
-                    Text("Password must contain an uppercase letter, lowercase letter, a number, and be at least 8 characters long.")
-                    .foregroundColor(Color.red)
-                    .padding(EdgeInsets(top: 8, leading: 0, bottom: 8,
-                    trailing: 30 ))
-                }
-            }
-            
-           
-            
-            //Create button
-            Button(action: {
                 
-                self.processInput()
-                
-            }) {
-                Text("Create Account")
-            } // end of button
-            
-            
-            
-        } // end of stack
-        return stack
+                } //end of form
+                .navigationBarTitle(Text("Create Account"))
+            } //end of NavigationView
+        ) // end of AnyView
     } // end of body
 } // end of CreateAccountView
+
 
 
 /*

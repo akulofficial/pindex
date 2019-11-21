@@ -26,23 +26,17 @@ struct NewPost: View {
 
     var body: some View {
         NavigationView {
-            
-            VStack {
-               TextField("Event Name", text: $eventName)
-                   .padding(EdgeInsets(top: 8, leading: 10, bottom: 8,
-                                       trailing: 10 ))
-                   .background(Color.white)
-                   .clipShape(RoundedRectangle(cornerRadius: 8))
-                   .shadow(radius: 8)
-               TextField("Event Content", text: $eventContent)
-                   .padding(EdgeInsets(top: 8, leading: 10, bottom: 8,
-                                       trailing: 10 ))
-                   .background(Color.white)
-                   .clipShape(RoundedRectangle(cornerRadius: 8))
-                   .shadow(radius: 8)
-
-               Button(action: {
-                   self.ref = db.collection("Post").addDocument( data: [
+            Form {
+                Section(header: Text("Event Name")) {
+                    TextField("Event Name", text: $eventName)
+                }
+                    
+                Section(header: Text("Event Content")) {
+                    TextField("Event Content", text: $eventContent)
+                }
+                
+                Button(action: {
+                    self.ref = db.collection("Post").addDocument( data: [
                       "Title": self.eventName,
                       "Content": self.eventContent,
                       "Date_Posted": self.datePosted,
@@ -50,21 +44,12 @@ struct NewPost: View {
                       "ID" : currentBulletinBoard
                    ])
                 
-                let p = Post.init(title: self.eventName, content: self.eventContent, id: self.posts.count)
-                self.posts.append(p)
-                
-                /*
-                var idCount:Int = 0
-                if self.posts != nil {
-                    idCount = self.posts!.count
-                }
-                let p = Post.init(title: self.eventName, content: self.eventContent, id: idCount)
-                self.posts?.append(p)
- */
-                
-                  print("\n\nDocumentID: " + self.ref!.documentID)
-                self.presentationMode.wrappedValue.dismiss()
-               }) {
+                    let p = Post.init(title: self.eventName, content: self.eventContent, id: self.posts.count)
+                    self.posts.append(p)
+                    
+                    print("\n\nDocumentID: " + self.ref!.documentID)
+                    self.presentationMode.wrappedValue.dismiss()
+                }) {
                    Text("Create Post")
                     .navigationBarTitle("Create a Post")
                     .navigationBarItems(leading:
@@ -74,14 +59,10 @@ struct NewPost: View {
                     })
                }
             
-            } // end of VStack
-                .padding(EdgeInsets(top: 8, leading: 10, bottom: 8,
-                                    trailing: 10 ))
-            
+            } // end of Form
         } // end of NavigationView
-                            
     } // end of body
-}
+} //end of NewPost
 
 /*
 struct NewPost_Previews: PreviewProvider {

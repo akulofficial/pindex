@@ -42,8 +42,6 @@ struct BulletinBoardView: View {
                 self.showingPostView.toggle()
             }) {
                 Text("Post")
-                .padding(EdgeInsets(top: 12, leading: 10, bottom: 20,
-                trailing: 10 ))
             }.sheet(isPresented: $showingPostView) {
                 NewPost(posts: self.$posts)
             })

@@ -9,6 +9,7 @@
 import SwiftUI
 import Firebase
 import BCryptSwift
+import Combine
 
 var account:UserAccount?
 
@@ -16,6 +17,7 @@ struct LoginView: View {
     
     @State var username = ""
     @State var password = ""
+    //@ObservedObject var passwordChecker: PasswordChecker = PasswordChecker()
     @State var switchView = false // will change to true when the user taps a button to change the view
     @State var isLoggedIn = false
     @State var displayLoginError = false // will be true when the user enters a wrong username or password
@@ -24,83 +26,68 @@ struct LoginView: View {
         
         if switchView == false { // show the login view
             return AnyView(
-                
                 NavigationView {
-                    VStack {
+                    Form {
+                        Section(header: Text("Username")) {
+                            TextField("Username", text: $username)
+                        }
                         
-                        Text("Pindex")
-                            .font(.title)
+                        Section(header: (Text("Password"))) {
+                            SecureField("Password", text: $password)
+                        }
                         
-                       TextField("username", text: $username)
-                           .padding(EdgeInsets(top: 8, leading: 10, bottom: 8,
-                                               trailing: 10 ))
-                           .background(Color.white)
-                           .clipShape(RoundedRectangle(cornerRadius: 8))
-                           .shadow(radius: 8)
-                        
-                        SecureField("password", text: $password)
-                        .padding(EdgeInsets(top: 8, leading: 10, bottom: 8,
-                                            trailing: 10 ))
-                        .background(Color.white)
-                        .clipShape(RoundedRectangle(cornerRadius: 8))
-                        .shadow(radius: 8)
-                            
                         if displayLoginError == true {
-                            Text("Username or password was incorrect")
+                            Text("Invalid login info!")
                             .foregroundColor(Color.red)
                         }
-                               
-                       Button(action: {
-                           // Closure will be called once user taps your button
-                           print("Tapped the login button")
-                        
-                        db.collection("User").whereField("Username", isEqualTo: self.username).whereField("Password", isEqualTo: BCryptSwift.hashPassword(self.password, withSalt: salt))
-                                .getDocuments() { (querySnapshot, err) in
-                                    if let err = err {
-                                        print("Error getting documents: \(err)")
-                                    } else {
-                                         
-                                        // getting the login for username and password
-                                        for document in querySnapshot!.documents {
-                                            let documentDict = document.data()
-                                            print("\(document.documentID) => \(documentDict)")
+                        Section {
+                           Button(action: {
+                               // Closure will be called once user taps your button
+                               print("Tapped the login button")
+                            
+                            db.collection("User").whereField("Username", isEqualTo: self.username).whereField("Password", isEqualTo: BCryptSwift.hashPassword(self.password, withSalt: salt))
+                                    .getDocuments() { (querySnapshot, err) in
+                                        if let err = err {
+                                            print("Error getting documents: \(err)")
+                                        } else {
+                                             
+                                            // getting the login for username and password
+                                            for document in querySnapshot!.documents {
+                                                let documentDict = document.data()
+                                                print("\(document.documentID) => \(documentDict)")
+                                                
+                                                account = UserAccount.init(fName: documentDict["First_Name"] as! String,
+                                                    lName: documentDict["Last_Name"] as! String,
+                                                    username: documentDict["Username"] as! String)
+                                            } // end of for loop document in querySnapshot
                                             
-                                            account = UserAccount.init(fName: documentDict["First_Name"] as! String,
-                                                lName: documentDict["Last_Name"] as! String,
-                                                username: documentDict["Username"] as! String)
-                                        } // end of for loop document in querySnapshot
-                                        
-                                        if account != nil { // the user successfully logged in
-                                            self.isLoggedIn = true
-                                            self.displayLoginError = false
-                                            self.switchView = true
-                                        } else { // the user name or password was wrong
-                                            self.displayLoginError = true
-                                        }
-                                        
-                                    } // end of if-else
-                            } // end of db query
-                           
-                       }) {
-                           Text("Login")
-                            .padding(EdgeInsets(top: 15, leading: 10, bottom: 8,
-                                                trailing: 10 ))
-                       }
+                                            if account != nil { // the user successfully logged in
+                                                self.isLoggedIn = true
+                                                self.displayLoginError = false
+                                                self.switchView = true
+                                            } else { // the user name or password was wrong
+                                                self.displayLoginError = true
+                                            }
+                                            
+                                        } // end of if-else
+                                } // end of db query
+                               
+                           }) {
+                               Text("Login")
+                           }
+                        }
                        
                         
-                       Text("Don't have and account?")
-                       NavigationLink(destination: CreateAccountView()) {
-                           Text("Create Account")
-                            .padding(EdgeInsets(top: 7, leading: 10, bottom: 8,
-                                                trailing: 10 ))
-                       } // end of NavigationLink
+                        Section(header: Text("Don't have an account?")) {
+                           NavigationLink(destination: CreateAccountView()) {
+                               Text("Create Account")
+                           } // end of NavigationLink
+                        } //end of Section
                     
-                    } // end of VStack
-                        .padding(EdgeInsets(top: 8, leading: 10, bottom: 8,
-                                            trailing: 10 ))
+                    } // end of Form
+                     .navigationBarTitle(Text("Welcome to Pindex!"))
+                        
                 } // end of NavigationView
-                .background(Color.black)
-                
             ) // end of AnyView()
         } else { // show the next view
             return AnyView(MapView(isLoggedIn: self.$isLoggedIn))
