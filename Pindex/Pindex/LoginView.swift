@@ -85,10 +85,10 @@ struct LoginView: View {
                         } //end of Section
                     
                     } // end of Form
-                     .navigationBarTitle(Text("Welcome to Pindex!"))
-                        
+                         
+                 .navigationBarTitle(Text("Welcome to Pindex!"))
                 } // end of NavigationView
-                .environment(\.horizontalSizeClass, .compact) 
+                .environment(\.horizontalSizeClass, .compact)
             ) // end of AnyView()
         } else { // show the next view
             return AnyView(MapView(isLoggedIn: self.$isLoggedIn))

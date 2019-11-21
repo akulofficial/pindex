@@ -14,7 +14,23 @@
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="IIq-SC-1o2">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="VGG-VJ-349">
+                                <rect key="frame" x="-817" y="-576" width="2048" height="2048"/>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="VGG-VJ-349" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="4RC-in-Sbk"/>
+                            <constraint firstItem="VGG-VJ-349" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="50z-Ep-FSw"/>
+                            <constraint firstItem="IIq-SC-1o2" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="OGl-Jc-UIS"/>
+                            <constraint firstAttribute="bottom" secondItem="IIq-SC-1o2" secondAttribute="bottom" id="V5k-fF-S6L"/>
+                            <constraint firstItem="IIq-SC-1o2" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="Vcl-7e-W7O"/>
+                            <constraint firstItem="IIq-SC-1o2" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="i2n-Za-Uz4"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                 </viewController>
@@ -23,4 +39,8 @@
             <point key="canvasLocation" x="52.173913043478265" y="375"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Logo" width="1024" height="1024"/>
+        <image name="background" width="393" height="550"/>
+    </resources>
 </document>

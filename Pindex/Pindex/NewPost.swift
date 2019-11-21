@@ -33,6 +33,8 @@ struct NewPost: View {
                     
                 Section(header: Text("Event Content")) {
                     TextField("Event Content", text: $eventContent)
+                        .frame(height: 200)
+                        .multilineTextAlignment(.leading)
                 }
                 
                 Button(action: {
